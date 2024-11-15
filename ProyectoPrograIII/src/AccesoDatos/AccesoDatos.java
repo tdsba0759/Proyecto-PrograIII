@@ -43,7 +43,7 @@ public class AccesoDatos  {
 
     //Aqui se hace el set de del Resgistro
     @Override
-    public void setRegistro(String registro) {
+    public void setRegistro(String registro) { 
         this.registro = registro;
     }
 
