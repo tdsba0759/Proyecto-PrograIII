@@ -13,6 +13,8 @@ import java.util.ArrayList;
  *
  * @author DavidMonteroSosa
  */
+
+
 public class AccesoDatos  {
 
     private String nombreArchivo;  // Nombre del archivo donde se almacenan los registros
