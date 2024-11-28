@@ -10,4 +10,11 @@ package Servicios;
  */
 public interface ServicioAccesoDatosTipoCambio {
     
+  String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email) throws Exception;
+  
+  String buildSoapRequest(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token);
+      
+  String parseResponse(String responseXml) throws Exception;
+  
+  
 }
