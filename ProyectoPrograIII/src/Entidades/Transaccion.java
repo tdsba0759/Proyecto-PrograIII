@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Entidades;
+
 import java.util.Date;
 
 /**
@@ -10,12 +11,14 @@ import java.util.Date;
  * @author Joshua
  */
 public class Transaccion {
-    
+
     private String tipoTransaccion;
     private double monto;
     private Date fecha;
+    private String cuentaId;
 
-    public Transaccion() {}
+    public Transaccion() {
+    }
 
     public Transaccion(String tipoTransaccion, double monto, Date fecha) {
         this.tipoTransaccion = tipoTransaccion;
@@ -46,5 +49,13 @@ public class Transaccion {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    
+
+    public String getCuentaId() {
+        return cuentaId;
+    }
+
+    public void setCuentaId(String cuentaId) {
+        this.cuentaId = cuentaId;
+    }
+
 }

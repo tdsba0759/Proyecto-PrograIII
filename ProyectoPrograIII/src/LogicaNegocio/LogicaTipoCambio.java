@@ -1,7 +1,5 @@
 
 
-import Servicios.ServicioAccesoDatosTipoCambio;
-
 /**
  *
  * @author dmsda
@@ -9,6 +7,8 @@ import Servicios.ServicioAccesoDatosTipoCambio;
 
 package LogicaNegocio;
 
+
+import Servicios.ServicioAccesoDatosTipoCambio;
 
 
 public class LogicaTipoCambio implements Servicios.ServicioLogicaTipoCambio{
