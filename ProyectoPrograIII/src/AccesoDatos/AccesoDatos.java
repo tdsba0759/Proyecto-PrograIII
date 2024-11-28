@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 
-public class AccesoDatos  {
+public class AccesoDatos implements Servicios.ServiciosaAccesoDatos{
 
     private String nombreArchivo;  // Nombre del archivo donde se almacenan los registros
     private String registro;  // Contenido del registro actual a escribir o modificar
