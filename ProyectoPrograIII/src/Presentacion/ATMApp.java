@@ -49,7 +49,7 @@ public class ATMApp extends javax.swing.JFrame {
             }
         });
 
-        btnCerrar.setText("Cerrar");
+        btnCerrar.setText("Cerrar sesion");
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);
@@ -107,35 +107,18 @@ public class ATMApp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        VentanaRegistro RegistroUsuario = new VentanaRegistro();
-        RegistroUsuario.setVisible(true);
-        dispose();
+    
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-
-            // Mostrar cuadro de confirmación
-    int opcion = JOptionPane.showConfirmDialog(
-            this, // Ventana padre
-            "¿Estás seguro de que deseas cerrar la ventana?", // Mensaje
-            "Confirmación de cierre", // Título
-            JOptionPane.YES_NO_OPTION, // Opciones disponibles
-            JOptionPane.QUESTION_MESSAGE // Icono de pregunta
-    );
-
-    // Verificar la opción seleccionada
-    if (opcion == JOptionPane.YES_OPTION) {
-        // Cerrar la ventana
+VentanaLogin login = new VentanaLogin();
+        login.setVisible(true);
         this.dispose();
-    } else {
-    }
     
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoActionPerformed
-        VentanaLogin login = new VentanaLogin();
-        login.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btnIngresoActionPerformed
 
     /**
