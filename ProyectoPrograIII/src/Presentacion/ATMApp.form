@@ -77,7 +77,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnRegistro">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Registrarse"/>
+        <Property name="text" type="java.lang.String" value="Depositar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistroActionPerformed"/>
@@ -93,12 +93,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnOperaciones">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mis Operaciones"/>
+        <Property name="text" type="java.lang.String" value="Consultar"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnIngreso">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingresar"/>
+        <Property name="text" type="java.lang.String" value="Retirar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresoActionPerformed"/>

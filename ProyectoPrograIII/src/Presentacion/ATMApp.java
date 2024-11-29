@@ -4,7 +4,6 @@
  */
 package Presentacion;
 
-import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,7 +42,7 @@ public class ATMApp extends javax.swing.JFrame {
 
         btnTransacciones.setText("Mis Transacciones");
 
-        btnRegistro.setText("Registrarse");
+        btnRegistro.setText("Depositar");
         btnRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistroActionPerformed(evt);
@@ -57,9 +56,9 @@ public class ATMApp extends javax.swing.JFrame {
             }
         });
 
-        btnOperaciones.setText("Mis Operaciones");
+        btnOperaciones.setText("Consultar");
 
-        btnIngreso.setText("Ingresar");
+        btnIngreso.setText("Retirar");
         btnIngreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresoActionPerformed(evt);
