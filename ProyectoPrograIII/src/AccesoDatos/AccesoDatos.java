@@ -10,51 +10,89 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * Clase que implementa los servicios de acceso a datos mediante operaciones 
+ * de lectura, escritura, modificación y eliminación en archivos de texto.
+ * Permite gestionar registros almacenados en formato delimitado por comas.
  *
  * @author Joshua
  */
+public class AccesoDatos implements Servicios.ServiciosaAccesoDatos {
 
+    /**
+     * Nombre del archivo donde se almacenan los registros.
+     */
+    public String nombreArchivo;
 
-public class AccesoDatos implements Servicios.ServiciosaAccesoDatos{
+    /**
+     * Contenido del registro actual que será utilizado en operaciones de escritura o modificación.
+     */
+    private String registro;
 
-    public String nombreArchivo;  // Nombre del archivo donde se almacenan los registros
-    private String registro;  // Contenido del registro actual a escribir o modificar
-    private boolean eliminar;  // Indica si la operación actual es de eliminación
+    /**
+     * Indica si la operación actual es de eliminación.
+     */
+    private boolean eliminar;
 
+    /**
+     * Constructor por defecto.
+     */
     public AccesoDatos() {
-
     }
 
-    //Aqui se hace el get de del Nombre del Archivo
+    /**
+     * Obtiene el nombre del archivo donde se almacenan los registros.
+     *
+     * @return Nombre del archivo.
+     */
     @Override
     public String getNombreArchivo() {
         return nombreArchivo;
     }
 
-    //Aqui se hace el set de del Nombre del Archivo
+    /**
+     * Establece el nombre del archivo donde se almacenan los registros.
+     *
+     * @param nombreArchivo Nombre del archivo.
+     */
     @Override
     public void setNombreArchivo(String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
     }
 
-    //Aqui se hace el get de del Registro
+    /**
+     * Obtiene el registro actual.
+     *
+     * @return Registro actual.
+     */
     @Override
     public String getRegistro() {
         return registro;
     }
 
-    //Aqui se hace el set de del Resgistro
+    /**
+     * Establece el contenido del registro actual.
+     *
+     * @param registro Contenido del registro.
+     */
     @Override
-    public void setRegistro(String registro) { 
+    public void setRegistro(String registro) {
         this.registro = registro;
     }
 
-    // Aqui se establece el eliminar 
+    /**
+     * Indica si la operación actual es de eliminación.
+     *
+     * @return {@code true} si la operación es de eliminación, de lo contrario {@code false}.
+     */
     public boolean isEliminar() {
         return eliminar;
     }
 
-    // Aqui se hace el set del eliminar 
+    /**
+     * Establece si la operación actual será de eliminación.
+     *
+     * @param eliminar {@code true} para operación de eliminación, de lo contrario {@code false}.
+     */
     @Override
     public void setEliminar(boolean eliminar) {
         this.eliminar = eliminar;
@@ -68,81 +106,74 @@ public class AccesoDatos implements Servicios.ServiciosaAccesoDatos{
      */
     @Override
     public void agregarRegistro(String linea) throws IOException {
-        // El BufferedWriter permite escribir en el archivo de manera eficiente.
         try (BufferedWriter objBw = new BufferedWriter(new FileWriter(this.getNombreArchivo(), true))) {
-            objBw.write(linea);  // Escribe la línea en el archivo.
-            objBw.newLine();  // Añade una nueva línea para separar los registros.
+            objBw.write(linea);
+            objBw.newLine();
         }
     }
 
     /**
-     * Lee todos los registros del archivo y los devuelve como una lista de
-     * arrays de String.
+     * Lee todos los registros del archivo y los devuelve como una lista de arrays de cadenas.
      *
-     * @return Una lista de arrays de String, donde cada array representa un
-     * registro.
-     * @throws FileNotFoundException Si el archivo especificado no se encuentra.
+     * @return Una lista de arrays de cadenas, donde cada array representa un registro.
+     * @throws FileNotFoundException Si el archivo especificado no existe.
      * @throws IOException Si ocurre un error al leer el archivo.
      */
     @Override
     public ArrayList<String[]> leerRegistros() throws FileNotFoundException, IOException {
         ArrayList<String[]> listaRegistros = new ArrayList<>();
 
-        // BufferedReader se utiliza para leer el archivo de manera eficiente.
         try (BufferedReader objBr = new BufferedReader(new FileReader(this.getNombreArchivo()))) {
-            while ((this.registro = objBr.readLine()) != null) {  // Lee cada línea del archivo.
-                String[] datos = this.registro.split(",");  // Divide la línea en campos separados por comas.
-                listaRegistros.add(datos);  // Añade el registro a la lista.
+            while ((this.registro = objBr.readLine()) != null) {
+                String[] datos = this.registro.split(",");
+                listaRegistros.add(datos);
             }
-            return listaRegistros;  // Devuelve la lista de registros.
+            return listaRegistros;
         }
     }
 
     /**
-     * Modifica o elimina un registro en el archivo basado en el ID
-     * especificado. Si la operación es de eliminación, se omitirá el registro
-     * correspondiente. Si la operación es de modificación, se reemplazará el
-     * registro existente con los nuevos datos.
+     * Modifica o elimina un registro en el archivo basado en el ID especificado.
+     * Si la operación es de eliminación, omite el registro correspondiente.
+     * Si es de modificación, reemplaza el registro existente con los nuevos datos.
      *
      * @param id El ID del registro a modificar o eliminar.
      * @throws IOException Si ocurre un error al leer o escribir en el archivo.
      */
     @Override
     public void modificarRegistro(String id) throws IOException {
-        File archivoActual = new File(this.nombreArchivo);  // Archivo original donde se encuentran los registros.
-        File archivoTemp = new File("temp_" + this.nombreArchivo);  // Archivo temporal para almacenar los cambios.
+        File archivoActual = new File(this.nombreArchivo);
+        File archivoTemp = new File("temp_" + this.nombreArchivo);
 
-        // BufferedReader para leer el archivo original y BufferedWriter para escribir en el archivo temporal.
-        try (BufferedReader objBr = new BufferedReader(new FileReader(archivoActual)); BufferedWriter objBw = new BufferedWriter(new FileWriter(archivoTemp))) {
+        try (BufferedReader objBr = new BufferedReader(new FileReader(archivoActual));
+             BufferedWriter objBw = new BufferedWriter(new FileWriter(archivoTemp))) {
 
             String registroActual;
-            while ((registroActual = objBr.readLine()) != null) {  // Lee cada línea del archivo original.
-                String[] datosRegistro = registroActual.split(",");  // Divide la línea en campos separados por comas.
+            while ((registroActual = objBr.readLine()) != null) {
+                String[] datosRegistro = registroActual.split(",");
 
-                if (this.eliminar) {  // Si la operación es de eliminación
+                if (this.eliminar) {
                     if (datosRegistro[0].equals(id)) {
-                        continue;  // Omitir la escritura de este registro en el archivo temporal.
+                        continue;
                     }
-                    objBw.write(registroActual);  // Escribe el registro no eliminado en el archivo temporal.
+                    objBw.write(registroActual);
                     objBw.newLine();
-                } else {  // Si la operación es de modificación
+                } else {
                     if (datosRegistro[0].equals(id)) {
-                        objBw.write(this.registro);  // Escribe el nuevo registro en lugar del original.
+                        objBw.write(this.registro);
                         objBw.newLine();
                     } else {
-                        objBw.write(registroActual);  // Escribe los registros no modificados tal como están.
+                        objBw.write(registroActual);
                         objBw.newLine();
                     }
                 }
             }
         }
 
-        // Eliminar el archivo original.
         if (!archivoActual.delete()) {
             throw new IOException("No se puede borrar el archivo original.");
         }
 
-        // Renombrar el archivo temporal para reemplazar al archivo original.
         if (!archivoTemp.renameTo(archivoActual)) {
             throw new IOException("No se puede renombrar el archivo temporal.");
         }

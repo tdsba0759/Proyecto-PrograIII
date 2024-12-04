@@ -1,4 +1,3 @@
-
 package AccesoDatos;
 
 import java.io.BufferedReader;
@@ -11,14 +10,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Clase que gestiona el control de IDs únicos para diferentes archivos.
+ * Se asegura de que cada archivo tenga un ID único incremental.
+ * Los IDs se almacenan y persisten en un archivo de control.
  *
  * @author dmsda
  */
 public class Idcontrol {
-     //Variables 
+
+    /**
+     * Nombre del archivo de control donde se almacenan los IDs.
+     */
     private String controlFile;
+
+    /**
+     * Mapa que asocia el nombre de cada archivo con su último ID utilizado.
+     */
     private Map<String, Integer> idMap;
 
+    /**
+     * Constructor que inicializa el gestor de IDs.
+     * Verifica o crea el archivo de control y carga los IDs existentes.
+     *
+     * @param controlFile Nombre del archivo de control.
+     * @throws IOException Si ocurre un error al acceder o crear el archivo de control.
+     */
     public Idcontrol(String controlFile) throws IOException {
         this.controlFile = controlFile;
         this.idMap = new HashMap<>();
@@ -26,7 +42,11 @@ public class Idcontrol {
         loadIds();
     }
 
-    // Verifica si el archivo existe y lo crea si no existe
+    /**
+     * Verifica si el archivo de control existe, y lo crea si no es así.
+     *
+     * @throws IOException Si ocurre un error al crear el archivo.
+     */
     private void initializeFile() throws IOException {
         File file = new File(controlFile);
         if (!file.exists()) {
@@ -37,7 +57,12 @@ public class Idcontrol {
         }
     }
 
-    // Carga los IDs del archivo
+    /**
+     * Carga los IDs almacenados en el archivo de control.
+     * Los datos se almacenan en el mapa {@code idMap}.
+     *
+     * @throws IOException Si ocurre un error al leer el archivo de control o el formato es incorrecto.
+     */
     private void loadIds() throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(controlFile))) {
             String line;
@@ -55,7 +80,11 @@ public class Idcontrol {
         }
     }
 
-    // Guarda los IDs en el archivo
+    /**
+     * Guarda los IDs actuales en el archivo de control.
+     *
+     * @throws IOException Si ocurre un error al escribir en el archivo de control.
+     */
     private void saveIds() throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(controlFile))) {
             for (Map.Entry<String, Integer> entry : idMap.entrySet()) {
@@ -65,7 +94,14 @@ public class Idcontrol {
         }
     }
 
-    // Obtiene el siguiente ID y actualiza el archivo
+    /**
+     * Obtiene el siguiente ID único para un archivo específico y lo actualiza en el archivo de control.
+     *
+     * @param fileName Nombre del archivo para el cual se requiere el siguiente ID.
+     * @return El siguiente ID único para el archivo especificado.
+     * @throws IOException Si ocurre un error al actualizar el archivo de control.
+     * @throws IllegalArgumentException Si el nombre del archivo es nulo o vacío.
+     */
     public synchronized int getNextId(String fileName) throws IOException {
         if (fileName == null || fileName.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre del archivo no puede ser nulo o vacío.");

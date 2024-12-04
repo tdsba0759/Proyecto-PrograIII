@@ -1,5 +1,3 @@
-
-
 package AccesoDatos;
 
 import java.io.OutputStream;
@@ -15,17 +13,40 @@ import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
+ * Clase que implementa el acceso a los datos del tipo de cambio mediante un servicio SOAP.
+ * Proporciona métodos para realizar solicitudes y procesar respuestas relacionadas con
+ * indicadores económicos publicados por el Banco Central de Costa Rica.
  *
  * @author dmsda
  */
 public class AccesoDatosTipoCambio implements Servicios.ServicioAccesoDatosTipoCambio {
 
-    private String token;  // Ahora es un String
+    /**
+     * Token de autenticación para el servicio SOAP.
+     */
+    private String token;
 
+    /**
+     * Constructor que inicializa el objeto con el token de autenticación.
+     *
+     * @param token Token de autenticación proporcionado para el servicio.
+     */
     public AccesoDatosTipoCambio(String token) {
-        this.token = token;  // El token sigue siendo un String
+        this.token = token;
     }
 
+    /**
+     * Obtiene el tipo de cambio utilizando los parámetros especificados.
+     *
+     * @param indicador Código del indicador económico.
+     * @param fechaInicio Fecha de inicio en formato "yyyy-MM-dd".
+     * @param fechaFinal Fecha final en formato "yyyy-MM-dd".
+     * @param nombre Nombre del solicitante.
+     * @param subniveles Indicador de inclusión de subniveles ("S" o "N").
+     * @param email Correo electrónico del solicitante.
+     * @return Valor del tipo de cambio como una cadena.
+     * @throws Exception Si ocurre algún error en la conexión o procesamiento de la respuesta.
+     */
     @Override
     public String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email) throws Exception {
         String endpoint = "https://gee.bccr.fi.cr/Indicadores/Suscripciones/WS/wsindicadoreseconomicos.asmx";
@@ -59,6 +80,18 @@ public class AccesoDatosTipoCambio implements Servicios.ServicioAccesoDatosTipoC
         }
     }
 
+    /**
+     * Construye el cuerpo de la solicitud SOAP utilizando los parámetros proporcionados.
+     *
+     * @param indicador Código del indicador económico.
+     * @param fechaInicio Fecha de inicio en formato "yyyy-MM-dd".
+     * @param fechaFinal Fecha final en formato "yyyy-MM-dd".
+     * @param nombre Nombre del solicitante.
+     * @param subniveles Indicador de inclusión de subniveles ("S" o "N").
+     * @param email Correo electrónico del solicitante.
+     * @param token Token de autenticación.
+     * @return Cadena que representa la solicitud SOAP.
+     */
     @Override
     public String buildSoapRequest(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token) {
         return "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -73,12 +106,19 @@ public class AccesoDatosTipoCambio implements Servicios.ServicioAccesoDatosTipoC
                 + "<Nombre>" + nombre + "</Nombre>"
                 + "<SubNiveles>" + subniveles + "</SubNiveles>"
                 + "<CorreoElectronico>" + email + "</CorreoElectronico>"
-                + "<Token>" + token + "</Token>"  // Aquí sigue siendo un String
+                + "<Token>" + token + "</Token>"
                 + "</ObtenerIndicadoresEconomicosXML>"
                 + "</soap:Body>"
                 + "</soap:Envelope>";
     }
 
+    /**
+     * Analiza la respuesta SOAP y extrae el valor del tipo de cambio.
+     *
+     * @param responseXml Respuesta SOAP en formato XML como cadena.
+     * @return Valor del tipo de cambio como una cadena.
+     * @throws Exception Si ocurre un error al analizar la respuesta.
+     */
     @Override
     public String parseResponse(String responseXml) throws Exception {
         String decodedXml = responseXml.replace("&lt;", "<").replace("&gt;", ">");
@@ -90,7 +130,7 @@ public class AccesoDatosTipoCambio implements Servicios.ServicioAccesoDatosTipoC
         if (valueNodeList.getLength() > 0) {
             return valueNodeList.item(0).getTextContent();
         } else {
-            return "No se encontró el valor de tipo de cambio en la respuesta.";
+            return "No se encontró el valor de tipo de cambio.";
         }
     }
 }
