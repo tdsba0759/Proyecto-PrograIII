@@ -13,8 +13,7 @@ import java.util.Date;
  * Utiliza la clase AccesoDatos para la lectura y escritura de registros y la clase Idcontrol 
  * para la gestión de los identificadores únicos de transacciones.
  * 
- * @author dmsda
- * 
+ * @autor dmsda
  */
 public class LogicaTransaccion {
     
@@ -29,7 +28,7 @@ public class LogicaTransaccion {
      */
     public LogicaTransaccion() throws IOException {
         accesoDatos = new AccesoDatos();
-        idControl = new Idcontrol("controlIds.txt");
+        idControl = new Idcontrol("cuentas.txt");
     }
 
     /**
@@ -44,7 +43,7 @@ public class LogicaTransaccion {
         
         for (String[] registro : registros) {
             if (registro[0].equals(cuentaId)) {
-                return Double.parseDouble(registro[2]); // Suponiendo que el saldo está en la posición 2
+                return Double.parseDouble(registro[2]); 
             }
         }
         
@@ -117,6 +116,65 @@ public class LogicaTransaccion {
         } else {
             throw new Exception("Cuenta no encontrada.");
         }
+    }
+
+    /**
+     * Transfiere un monto de una cuenta a otra.
+     * 
+     * @param cuentaOrigenId El identificador único de la cuenta de origen.
+     * @param cuentaDestinoId El identificador único de la cuenta de destino.
+     * @param monto El monto a transferir.
+     * @throws Exception Si no se encuentran las cuentas, el saldo es insuficiente, o si ocurre algún otro error.
+     */
+    public void transferirSaldo(String cuentaOrigenId, String cuentaDestinoId, double monto) throws Exception {
+        ArrayList<String[]> registros = accesoDatos.leerRegistros();
+        boolean cuentaOrigenEncontrada = false;
+        boolean cuentaDestinoEncontrada = false;
+
+        // Verificamos que ambas cuentas existan.
+        for (String[] registro : registros) {
+            if (registro[0].equals(cuentaOrigenId)) {
+                cuentaOrigenEncontrada = true;
+                double saldoActual = Double.parseDouble(registro[2]);
+                if (saldoActual < monto) {
+                    throw new Exception("Saldo insuficiente en la cuenta de origen.");
+                }
+            }
+            if (registro[0].equals(cuentaDestinoId)) {
+                cuentaDestinoEncontrada = true;
+            }
+        }
+
+        // Lanzamos excepciones si alguna de las cuentas no existe.
+        if (!cuentaOrigenEncontrada) {
+            throw new Exception("Cuenta de origen no encontrada.");
+        }
+        if (!cuentaDestinoEncontrada) {
+            throw new Exception("Cuenta de destino no encontrada.");
+        }
+
+        // Realizamos las actualizaciones de saldo.
+        for (String[] registro : registros) {
+            if (registro[0].equals(cuentaOrigenId)) {
+                double saldoActual = Double.parseDouble(registro[2]);
+                double nuevoSaldo = saldoActual - monto;
+                registro[2] = String.valueOf(nuevoSaldo); // Actualiza el saldo en la cuenta de origen.
+            }
+            if (registro[0].equals(cuentaDestinoId)) {
+                double saldoActual = Double.parseDouble(registro[2]);
+                double nuevoSaldo = saldoActual + monto;
+                registro[2] = String.valueOf(nuevoSaldo); // Actualiza el saldo en la cuenta de destino.
+            }
+        }
+
+        // Guardamos los registros actualizados.
+        for (String[] registro : registros) {
+            accesoDatos.agregarRegistro(String.join(",", registro));
+        }
+
+        // Registramos las transacciones correspondientes.
+        registrarTransaccion(cuentaOrigenId, monto, "Transferencia Enviada");
+        registrarTransaccion(cuentaDestinoId, monto, "Transferencia Recibida");
     }
 
     /**
