@@ -3,6 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Presentacion;
+// Este paquete contiene las clases relacionadas con la interfaz de usuario o las ventanas de presentación de la aplicación.
+
+import java.io.BufferedReader;
+// Clase para leer texto de un archivo de manera eficiente, línea por línea.
+
+import java.io.FileReader;
+// Clase que permite leer el contenido de un archivo de texto.
+
+import java.io.IOException;
+// Clase para manejar excepciones que ocurren durante operaciones de entrada/salida.
+
+import Seguridad.LogicaEncriptacion;
+// Clase personalizada ubicada en el paquete Seguridad, utilizada para gestionar la lógica de encriptación de datos como contraseñas.
+
+import java.io.BufferedWriter;
+// Clase para escribir texto en un archivo de manera eficiente, añadiendo contenido sin sobrescribir.
+
+import java.io.FileWriter;
+// Clase que permite escribir texto en un archivo de texto.
+
+
 
 import javax.swing.JOptionPane;
 
@@ -28,99 +49,146 @@ public class VentanaLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnMenuPrincipal = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        Pdcontrasena = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        TxtUsuario = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtCuenta = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtPin = new javax.swing.JPasswordField();
+        btnIngreso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnMenuPrincipal.setText("Registrarse");
-        btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuPrincipalActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Ingresar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Contraseña:");
-
-        jLabel3.setText("Usuario:");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Inicio de sesión");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, 30));
+
+        jLabel3.setText("Numero de Cuenta");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel1.add(txtCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 130, -1));
+
+        jLabel1.setText("Pin");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jPanel1.add(txtPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 130, -1));
+
+        btnIngreso.setText("Ingresar");
+        btnIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Pdcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnMenuPrincipal)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel2)
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Pdcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMenuPrincipal)
-                .addContainerGap(44, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        VentanaRegistro RegistroUsuario = new VentanaRegistro();
-        RegistroUsuario.setVisible(true);
-        dispose();
-   
-    }//GEN-LAST:event_btnMenuPrincipalActionPerformed
+    private void btnIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         ATMApp Principal = new ATMApp();
-        Principal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        // Obtiene el número de cuenta ingresado por el usuario desde el campo de texto.
+        String numeroCuenta = txtCuenta.getText();
 
+        // Obtiene el PIN ingresado por el usuario desde el campo de contraseña.
+        // La conversión a String se realiza porque el método `getPassword` devuelve un array de caracteres.
+        String pin = new String(txtPin.getPassword());
+
+        // Llama al método `autenticarUsuario` para verificar las credenciales ingresadas.
+        if (autenticarUsuario(numeroCuenta, pin)) {
+            // Si las credenciales son válidas:
+            // Muestra un mensaje de éxito en pantalla.
+            JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+
+            // Abre la ventana principal de la aplicación (ATMApp).
+            ATMApp principal = new ATMApp();
+            principal.setVisible(true);
+
+            // Cierra la ventana de inicio de sesión actual para evitar que quede abierta.
+            this.dispose();
+        } else {
+            // Si las credenciales son incorrectas:
+            // Muestra un mensaje de error indicando que el número de cuenta o el PIN son incorrectos.
+            JOptionPane.showMessageDialog(this, "Número de cuenta o PIN incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnIngresoActionPerformed
+
+    private boolean autenticarUsuario(String numeroCuenta, String pinIngresado) {
+    try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+        // Abre el archivo "usuarios.txt" y permite leerlo línea por línea.
+
+        String linea; // Variable para almacenar cada línea leída del archivo.
+        LogicaEncriptacion encriptacion = new LogicaEncriptacion(); // Instancia para manejar la encriptación y verificación del PIN.
+
+        while ((linea = br.readLine()) != null) { 
+            // Itera sobre cada línea del archivo mientras no sea null (fin del archivo).
+
+            String[] partes = linea.split(","); 
+            // Divide la línea en partes separadas por comas (formato esperado: "numeroCuenta,nombre,pinEncriptado").
+
+            String cuenta = partes[0]; // Obtiene el número de cuenta de la primera posición.
+            String pinEncriptado = partes[2]; // Obtiene el PIN encriptado de la tercera posición.
+
+            if (cuenta.equals(numeroCuenta) && encriptacion.verificarPin(pinIngresado, pinEncriptado)) {
+                // Verifica si el número de cuenta coincide y si el PIN ingresado es válido tras encriptarlo.
+                return true; // Retorna true si las credenciales coinciden.
+            }
+        }
+    } catch (IOException e) {
+        // Maneja errores relacionados con la lectura del archivo.
+        JOptionPane.showMessageDialog(this, "Error al leer el archivo de usuarios.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        // Maneja cualquier otro error (como problemas con la encriptación).
+        JOptionPane.showMessageDialog(this, "Error al verificar el PIN.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Retorna false si no se encontró un usuario válido o si ocurrió un error.
+    return false;
+}
+    
+   /**
+ * Acción ejecutada cuando se hace clic en el botón "Ingresar".
+ * Valida las credenciales del usuario (número de cuenta y PIN) y procede con el inicio de sesión.
+ * 
+ * @param evt El evento que desencadena la acción del botón.
+ */
+
+private boolean cuentaExiste(String numeroCuenta) {
+    try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+        // Abre el archivo "usuarios.txt" para lectura, utilizando BufferedReader para eficiencia.
+        
+        String linea; // Variable para almacenar cada línea leída del archivo.
+
+        while ((linea = br.readLine()) != null) {
+            // Lee el archivo línea por línea hasta que no queden más líneas (línea == null).
+
+            String[] partes = linea.split(",");
+            // Divide la línea en partes utilizando la coma como separador.
+            // Formato esperado: "numeroCuenta,nombre,pinEncriptado".
+
+            if (partes[0].equals(numeroCuenta)) {
+                // Compara el número de cuenta en el archivo con el número de cuenta proporcionado.
+                return true; // Retorna true si se encuentra una coincidencia.
+            }
+        }
+    } catch (IOException e) {
+        // Maneja cualquier error relacionado con la lectura del archivo.
+        JOptionPane.showMessageDialog(this, "Error al verificar el número de cuenta.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Si no se encuentra el número de cuenta o ocurre un error, retorna false.
+    return false;
+}    
+    
     /**
      * @param args the command line arguments
      */
@@ -158,12 +226,12 @@ public class VentanaLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPasswordField Pdcontrasena;
-    private javax.swing.JTextField TxtUsuario;
-    private javax.swing.JButton btnMenuPrincipal;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnIngreso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtCuenta;
+    private javax.swing.JPasswordField txtPin;
     // End of variables declaration//GEN-END:variables
 }
