@@ -3,13 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Presentacion;
+// Importaciones necesarias para el funcionamiento del programa
+
 import Seguridad.LogicaEncriptacion;
+// Importa la clase `LogicaEncriptacion` del paquete `Seguridad`.
+// Esta clase se utiliza para realizar operaciones de encriptación y verificación de datos sensibles, como contraseñas.
+
 import java.io.BufferedReader;
+// Importa la clase `BufferedReader`, que permite leer texto de archivos de manera eficiente, línea por línea.
+
 import java.io.BufferedWriter;
+// Importa la clase `BufferedWriter`, que permite escribir texto en archivos de manera eficiente, añadiendo contenido sin sobrescribir.
+
 import java.io.FileReader;
+// Importa la clase `FileReader`, que permite leer datos de un archivo de texto.
+
 import java.io.FileWriter;
+// Importa la clase `FileWriter`, que permite escribir datos en un archivo de texto.
+
 import java.io.IOException;
+// Importa la clase `IOException`, que se utiliza para manejar errores relacionados con la entrada/salida, como problemas al leer o escribir archivos.
+
 import javax.swing.JOptionPane;
+// Importa la clase `JOptionPane`, que se utiliza para mostrar cuadros de diálogo al usuario, como mensajes de error, advertencia o confirmación.
+
 /**
  *
  * @author Joshua
@@ -102,13 +119,32 @@ public class Credenciales extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String generarNumeroCuenta() {
-    return String.format("%05d", (int)(Math.random() * 100000)); // Genera un número de 5 dígitos
+/**
+ * Genera un número de cuenta único aleatorio de 5 dígitos.
+ * 
+ * @return Una cadena que representa el número de cuenta generado.
+ */
+private String generarNumeroCuenta() {
+    // Math.random() genera un número decimal aleatorio entre 0.0 y 1.0.
+    // Multiplicarlo por 100000 produce un rango entre 0 y 99999.
+    // (int) convierte el número a un entero, descartando los decimales.
+    // String.format("%05d") asegura que el número siempre tenga 5 dígitos, añadiendo ceros a la izquierda si es necesario.
+    return String.format("%05d", (int)(Math.random() * 100000));
 }
 
-    private String generarPin() {
-    return String.format("%04d", (int)(Math.random() * 10000)); // Genera un número de 4 dígitos
+/**
+ * Genera un PIN aleatorio de 4 dígitos.
+ * 
+ * @return Una cadena que representa el PIN generado.
+ */
+private String generarPin() {
+    // Math.random() genera un número decimal aleatorio entre 0.0 y 1.0.
+    // Multiplicarlo por 10000 produce un rango entre 0 y 9999.
+    // (int) convierte el número a un entero, descartando los decimales.
+    // String.format("%04d") asegura que el PIN siempre tenga 4 dígitos, añadiendo ceros a la izquierda si es necesario.
+    return String.format("%04d", (int)(Math.random() * 10000));
 }
+
     
     
     private void txtNumeroCuentaRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCuentaRegistroActionPerformed
