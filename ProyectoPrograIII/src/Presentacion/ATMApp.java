@@ -156,7 +156,7 @@ VentanaLogin login = new VentanaLogin();
         LogicaTransaccion logicaHistorial = new LogicaTransaccion();
 
         // Obtener los movimientos del historial
-        ArrayList<String[]> movimientos = logicaHistorial.obtenerHistorial(idPersona);
+        ArrayList<String[]> movimientos = logicaHistorial.consultarHistorial(idPersona);
 
         // Si no se encontraron movimientos
         if (movimientos.isEmpty()) {

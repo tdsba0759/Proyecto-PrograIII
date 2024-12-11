@@ -52,6 +52,7 @@ public class LogicaTransaccion {
         throw new Exception("Cuenta no encontrada.");
     }
 
+
     /**
      * Agrega un monto de dinero al saldo de una cuenta bancaria.
      *
