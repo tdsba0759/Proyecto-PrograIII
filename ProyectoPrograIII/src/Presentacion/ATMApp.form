@@ -32,19 +32,24 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnCerrar" min="-2" pref="216" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <Component id="btnOperaciones" pref="216" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnIngreso" min="-2" pref="216" max="-2" attributes="0"/>
-                          <Component id="btnTransacciones" min="-2" pref="216" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnIngreso" min="-2" pref="216" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnCerrar" min="-2" pref="216" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnHisotrial" min="-2" pref="216" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="266" max="32767" attributes="0"/>
+                  <Component id="btnTransferir1" min="-2" pref="216" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -58,22 +63,32 @@
                   <Component id="btnIngreso" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Component id="btnOperaciones" min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnTransacciones" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
-                  <Component id="btnOperaciones" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                  <Component id="btnCerrar" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                  <Component id="btnHisotrial" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="btnCerrar" min="-2" pref="55" max="-2" attributes="0"/>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="129" max="32767" attributes="0"/>
+                  <Component id="btnTransferir1" min="-2" pref="55" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnTransacciones">
+    <Component class="javax.swing.JButton" name="btnHisotrial">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mis Transacciones"/>
+        <Property name="text" type="java.lang.String" value="Movimientos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHisotrialActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRegistro">
       <Properties>
@@ -102,6 +117,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTransferir1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Transferir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTransferir1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

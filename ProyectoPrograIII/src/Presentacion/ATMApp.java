@@ -31,16 +31,22 @@ public class ATMApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnTransacciones = new javax.swing.JButton();
+        btnHisotrial = new javax.swing.JButton();
         btnRegistro = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         btnOperaciones = new javax.swing.JButton();
         btnIngreso = new javax.swing.JButton();
+        btnTransferir1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
 
-        btnTransacciones.setText("Mis Transacciones");
+        btnHisotrial.setText("Movimientos");
+        btnHisotrial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHisotrialActionPerformed(evt);
+            }
+        });
 
         btnRegistro.setText("Depositar");
         btnRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +71,13 @@ public class ATMApp extends javax.swing.JFrame {
             }
         });
 
+        btnTransferir1.setText("Transferir");
+        btnTransferir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransferir1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,16 +89,20 @@ public class ATMApp extends javax.swing.JFrame {
                         .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(131, 131, 131))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                         .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTransacciones, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))))
+                        .addComponent(btnIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnHisotrial, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(266, Short.MAX_VALUE)
+                    .addComponent(btnTransferir1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(8, 8, 8)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,12 +112,17 @@ public class ATMApp extends javax.swing.JFrame {
                     .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
+                .addComponent(btnOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTransacciones, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHisotrial, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(129, Short.MAX_VALUE)
+                    .addComponent(btnTransferir1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(116, 116, 116)))
         );
 
         pack();
@@ -120,6 +142,14 @@ VentanaLogin login = new VentanaLogin();
     private void btnIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoActionPerformed
         
     }//GEN-LAST:event_btnIngresoActionPerformed
+
+    private void btnHisotrialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHisotrialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHisotrialActionPerformed
+
+    private void btnTransferir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferir1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTransferir1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,9 +188,10 @@ VentanaLogin login = new VentanaLogin();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnHisotrial;
     private javax.swing.JButton btnIngreso;
     private javax.swing.JButton btnOperaciones;
     private javax.swing.JButton btnRegistro;
-    private javax.swing.JButton btnTransacciones;
+    private javax.swing.JButton btnTransferir1;
     // End of variables declaration//GEN-END:variables
 }

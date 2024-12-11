@@ -65,7 +65,7 @@ public class Credenciales extends javax.swing.JFrame {
         jLabel2.setText("REGISTRO DE USUARIOS");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 140, -1));
 
-        jLabel3.setText("Numero de Cuenta");
+        jLabel3.setText("Numero de Cédula");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 110, -1));
 
         txtNumeroCuentaRegistro.addActionListener(new java.awt.event.ActionListener() {
