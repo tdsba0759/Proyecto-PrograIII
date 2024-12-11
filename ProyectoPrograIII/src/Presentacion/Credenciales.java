@@ -1,29 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Presentacion;
 // Importaciones necesarias para el funcionamiento del programa
 
-import Seguridad.LogicaEncriptacion;
-// Importa la clase `LogicaEncriptacion` del paquete `Seguridad`.
-// Esta clase se utiliza para realizar operaciones de encriptación y verificación de datos sensibles, como contraseñas.
-
-import java.io.BufferedReader;
-// Importa la clase `BufferedReader`, que permite leer texto de archivos de manera eficiente, línea por línea.
-
-import java.io.BufferedWriter;
-// Importa la clase `BufferedWriter`, que permite escribir texto en archivos de manera eficiente, añadiendo contenido sin sobrescribir.
-
-import java.io.FileReader;
-// Importa la clase `FileReader`, que permite leer datos de un archivo de texto.
-
-import java.io.FileWriter;
-// Importa la clase `FileWriter`, que permite escribir datos en un archivo de texto.
-
+import LogicaNegocio.LogicaCuenta;
+import Servicios.ServicioLogicaCuenta;
 import java.io.IOException;
 // Importa la clase `IOException`, que se utiliza para manejar errores relacionados con la entrada/salida, como problemas al leer o escribir archivos.
-
 import javax.swing.JOptionPane;
 // Importa la clase `JOptionPane`, que se utiliza para mostrar cuadros de diálogo al usuario, como mensajes de error, advertencia o confirmación.
 
@@ -119,34 +101,7 @@ public class Credenciales extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-/**
- * Genera un número de cuenta único aleatorio de 5 dígitos.
- * 
- * @return Una cadena que representa el número de cuenta generado.
- */
-private String generarNumeroCuenta() {
-    // Math.random() genera un número decimal aleatorio entre 0.0 y 1.0.
-    // Multiplicarlo por 100000 produce un rango entre 0 y 99999.
-    // (int) convierte el número a un entero, descartando los decimales.
-    // String.format("%05d") asegura que el número siempre tenga 5 dígitos, añadiendo ceros a la izquierda si es necesario.
-    return String.format("%05d", (int)(Math.random() * 100000));
-}
 
-/**
- * Genera un PIN aleatorio de 4 dígitos.
- * 
- * @return Una cadena que representa el PIN generado.
- */
-private String generarPin() {
-    // Math.random() genera un número decimal aleatorio entre 0.0 y 1.0.
-    // Multiplicarlo por 10000 produce un rango entre 0 y 9999.
-    // (int) convierte el número a un entero, descartando los decimales.
-    // String.format("%04d") asegura que el PIN siempre tenga 4 dígitos, añadiendo ceros a la izquierda si es necesario.
-    return String.format("%04d", (int)(Math.random() * 10000));
-}
-
-    
-    
     private void txtNumeroCuentaRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCuentaRegistroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroCuentaRegistroActionPerformed
@@ -154,111 +109,57 @@ private String generarPin() {
     private void txtPinRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPinRegistroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPinRegistroActionPerformed
-    
-    
     /**
- * Verifica si un número de cuenta ya existe en el archivo "usuarios.txt".
- * 
- * Este método busca en el archivo de texto cada línea, separa los valores por comas
- * y verifica si el número de cuenta proporcionado coincide con el número de cuenta
- * almacenado en el archivo.
- * 
- * @param numeroCuenta El número de cuenta a verificar.
- * @return true si el número de cuenta ya existe, false en caso contrario.
- */
-private boolean cuentaExiste(String numeroCuenta) {
-    // Intenta abrir el archivo "usuarios.txt" para leer su contenido
-    try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
-        String linea;
-
-        // Lee el archivo línea por línea
-        while ((linea = br.readLine()) != null) {
-            // Divide la línea en partes separadas por comas (formato: numeroCuenta,nombre,pinEncriptado)
-            String[] partes = linea.split(",");
-
-            // Verifica si el número de cuenta en la línea coincide con el número proporcionado
-            if (partes[0].equals(numeroCuenta)) {
-                return true; // Retorna true si el número de cuenta ya existe
-            }
-        }
-    } catch (IOException e) {
-        // Muestra un mensaje de error si ocurre un problema al leer el archivo
-        JOptionPane.showMessageDialog(this, "Error al verificar el número de cuenta.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    // Retorna false si el número de cuenta no se encontró en el archivo
-    return false;
-}
-    
-    
-    private void agregarUsuario(String numeroCuenta, String nombre, String pin) {
-    // Verifica si el número de cuenta ya existe en el archivo
-    if (cuentaExiste(numeroCuenta)) {
-        // Si el número de cuenta ya existe, muestra un mensaje de error y detiene la ejecución
-        JOptionPane.showMessageDialog(this, "El número de cuenta ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    
-    try {
-        // Crea una instancia de la clase LogicaEncriptacion para manejar la encriptación
-        LogicaEncriptacion encriptacion = new LogicaEncriptacion();
-
-        // Encripta el PIN proporcionado utilizando el método encriptarPin
-        String pinEncriptado = encriptacion.encriptarPin(pin);
-
-        // Formatea la información del usuario en una línea separada por comas (formato: numeroCuenta,nombre,pinEncriptado)
-        String nuevaLinea = numeroCuenta + "," + nombre + "," + pinEncriptado;
-
-        // Escribe la nueva línea en el archivo "usuarios.txt" en modo de adición (append)
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt", true))) {
-            writer.write(nuevaLinea); // Escribe la línea
-            writer.newLine(); // Agrega un salto de línea
-        }
-
-        // Muestra un mensaje indicando que el usuario se agregó exitosamente
-        JOptionPane.showMessageDialog(this, "Usuario agregado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-    } catch (Exception e) {
-        // Maneja cualquier excepción que ocurra y muestra un mensaje de error con la descripción del problema
-        JOptionPane.showMessageDialog(this, "Error al agregar el usuario: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-}
-    
-    
-    /**
- * Acción realizada al hacer clic en el botón "Generar".
- * 
- * Este método permite registrar un nuevo usuario, generando automáticamente un número de cuenta y un PIN único,
- * siempre que se proporcione un nombre válido. Los datos del usuario se muestran en los campos de texto y
- * se guardan en el archivo "usuarios.txt".
- * 
- * @param evt Evento que dispara esta acción (clic en el botón "Generar").
- */
+     * Acción realizada al hacer clic en el botón "Generar".
+     *
+     * Este método permite registrar un nuevo usuario, generando automáticamente
+     * un número de cuenta y un PIN único, siempre que se proporcione un nombre
+     * válido. Los datos del usuario se muestran en los campos de texto y se
+     * guardan en el archivo "usuarios.txt".
+     *
+     * @param evt Evento que dispara esta acción (clic en el botón "Generar").
+     */
     private void btnGenerar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerar1ActionPerformed
-    // Pedir el nombre del usuario mediante un cuadro de diálogo
-    String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre del usuario:");
+        String numeroCuenta = txtNumeroCuentaRegistro.getText().trim();
+        String pin = txtPinRegistro.getText().trim();
+        if (numeroCuenta.isEmpty() || pin.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El número de cuenta y el PIN son obligatorios.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    // Verificar que se haya ingresado un nombre válido
-    if (nombre == null || nombre.isEmpty()) {
-        // Si no se ingresa un nombre, muestra un mensaje de advertencia y detiene la ejecución
-        JOptionPane.showMessageDialog(this, "El nombre es obligatorio. No se generará ninguna credencial.", "Error", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre del usuario:");
 
-    // Generar un número de cuenta único
-    String numeroCuenta;
-    do {
-        numeroCuenta = generarNumeroCuenta(); // Generar un número de 5 dígitos
-    } while (cuentaExiste(numeroCuenta)); // Verificar que el número de cuenta no exista ya en el archivo
+        // Validar que se hayan proporcionado todos los datos necesarios
+        if (nombre == null || nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El nombre es obligatorio. No se generará ninguna credencial.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    // Generar un PIN único de 4 dígitos
-    String pin = generarPin();
+        try {
+            // Instanciar la clase que implementa la interfaz ServicioLogicaCuenta
+            ServicioLogicaCuenta servicio = new LogicaCuenta(); // Aquí se hace la instanciación
 
-    // Mostrar el número de cuenta generado y el PIN en los campos de texto de la interfaz gráfica
-    txtNumeroCuentaRegistro.setText(numeroCuenta);
-    txtPinRegistro.setText(pin);
+            // Verificar si la cuenta ya existe
+            if (servicio.existeCuenta(numeroCuenta)) {
+                JOptionPane.showMessageDialog(this, "El número de cuenta ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-    // Llamar al método agregarUsuario para registrar al nuevo usuario en el archivo "usuarios.txt"
-    agregarUsuario(numeroCuenta, nombre, pin);
+            // Registrar la nueva cuenta con un saldo inicial de 0
+            servicio.crearNuevaCuenta(numeroCuenta, nombre, 0, pin); // Asegúrate de que este método esté correctamente implementado
+
+            // Mostrar mensaje de éxito
+            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException ex) {
+            // Mostrar mensaje de error en caso de excepción
+            JOptionPane.showMessageDialog(this, "Error al registrar el usuario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        // Cerrar la ventana actual
+        this.dispose();
+
+        // Abrir la ventana de login
+        VentanaLogin ventanaLogin = new VentanaLogin();
+        ventanaLogin.setVisible(true);
     }//GEN-LAST:event_btnGenerar1ActionPerformed
 
     private void btnCerrarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarRegistroActionPerformed

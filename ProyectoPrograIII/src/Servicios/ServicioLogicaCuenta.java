@@ -26,5 +26,5 @@ public interface ServicioLogicaCuenta {
      * @param saldo El saldo inicial de la nueva cuenta.
      * @throws IOException Si ocurre un error al crear la cuenta o acceder a los datos.
      */
-    void crearNuevaCuenta(String numeroCuenta, double saldo) throws IOException;
+    void crearNuevaCuenta(String numeroCuenta,String Nombre, double saldo, String pin) throws IOException;
 }
