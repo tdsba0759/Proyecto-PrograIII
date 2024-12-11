@@ -21,7 +21,7 @@ public interface ServicioAccesoDatosTipoCambio {
      * @return El tipo de cambio obtenido.
      * @throws Exception Si ocurre un error al obtener el tipo de cambio.
      */
-    String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email) throws Exception;
+    public String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token) throws Exception;
 
     /**
      * Construye una solicitud SOAP para obtener datos del tipo de cambio.
@@ -35,7 +35,7 @@ public interface ServicioAccesoDatosTipoCambio {
      * @param token El token de autenticación para la solicitud.
      * @return La solicitud SOAP construida.
      */
-    String buildSoapRequest(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token);
+    public String buildSoapRequest(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token);
     
     /**
      * Analiza la respuesta XML recibida de la solicitud SOAP.
@@ -44,5 +44,5 @@ public interface ServicioAccesoDatosTipoCambio {
      * @return El resultado del análisis de la respuesta.
      * @throws Exception Si ocurre un error al analizar la respuesta XML.
      */
-    String parseResponse(String responseXml) throws Exception;
+     public String parseResponse(String responseXml) throws Exception;
 }

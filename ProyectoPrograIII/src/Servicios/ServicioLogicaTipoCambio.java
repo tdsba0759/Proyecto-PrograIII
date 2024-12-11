@@ -22,5 +22,5 @@ public interface ServicioLogicaTipoCambio {
      * @return El tipo de cambio obtenido.
      * @throws Exception Si ocurre un error al obtener el tipo de cambio.
      */
-    String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email) throws Exception;
+   public String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token) throws Exception;
 }

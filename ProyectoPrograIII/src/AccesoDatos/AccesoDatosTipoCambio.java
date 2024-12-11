@@ -1,54 +1,29 @@
 package AccesoDatos;
 
-import java.io.OutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
 
 /**
- * Clase que implementa el acceso a los datos del tipo de cambio mediante un servicio SOAP.
- * Proporciona métodos para realizar solicitudes y procesar respuestas relacionadas con
- * indicadores económicos publicados por el Banco Central de Costa Rica.
  *
  * @author dmsda
  */
 public class AccesoDatosTipoCambio implements Servicios.ServicioAccesoDatosTipoCambio {
 
-    /**
-     * Token de autenticación para el servicio SOAP.
-     */
-    private String token;
+    public AccesoDatosTipoCambio() {
 
-    /**
-     * Constructor que inicializa el objeto con el token de autenticación.
-     *
-     * @param token Token de autenticación proporcionado para el servicio.
-     */
-    public AccesoDatosTipoCambio(String token) {
-        this.token = token;
     }
 
-    /**
-     * Obtiene el tipo de cambio utilizando los parámetros especificados.
-     *
-     * @param indicador Código del indicador económico.
-     * @param fechaInicio Fecha de inicio en formato "yyyy-MM-dd".
-     * @param fechaFinal Fecha final en formato "yyyy-MM-dd".
-     * @param nombre Nombre del solicitante.
-     * @param subniveles Indicador de inclusión de subniveles ("S" o "N").
-     * @param email Correo electrónico del solicitante.
-     * @return Valor del tipo de cambio como una cadena.
-     * @throws Exception Si ocurre algún error en la conexión o procesamiento de la respuesta.
-     */
     @Override
-    public String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email) throws Exception {
+    public String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token) throws Exception {
         String endpoint = "https://gee.bccr.fi.cr/Indicadores/Suscripciones/WS/wsindicadoreseconomicos.asmx";
         URL url = new URL(endpoint);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -80,18 +55,6 @@ public class AccesoDatosTipoCambio implements Servicios.ServicioAccesoDatosTipoC
         }
     }
 
-    /**
-     * Construye el cuerpo de la solicitud SOAP utilizando los parámetros proporcionados.
-     *
-     * @param indicador Código del indicador económico.
-     * @param fechaInicio Fecha de inicio en formato "yyyy-MM-dd".
-     * @param fechaFinal Fecha final en formato "yyyy-MM-dd".
-     * @param nombre Nombre del solicitante.
-     * @param subniveles Indicador de inclusión de subniveles ("S" o "N").
-     * @param email Correo electrónico del solicitante.
-     * @param token Token de autenticación.
-     * @return Cadena que representa la solicitud SOAP.
-     */
     @Override
     public String buildSoapRequest(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token) {
         return "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -112,13 +75,6 @@ public class AccesoDatosTipoCambio implements Servicios.ServicioAccesoDatosTipoC
                 + "</soap:Envelope>";
     }
 
-    /**
-     * Analiza la respuesta SOAP y extrae el valor del tipo de cambio.
-     *
-     * @param responseXml Respuesta SOAP en formato XML como cadena.
-     * @return Valor del tipo de cambio como una cadena.
-     * @throws Exception Si ocurre un error al analizar la respuesta.
-     */
     @Override
     public String parseResponse(String responseXml) throws Exception {
         String decodedXml = responseXml.replace("&lt;", "<").replace("&gt;", ">");
@@ -130,7 +86,7 @@ public class AccesoDatosTipoCambio implements Servicios.ServicioAccesoDatosTipoC
         if (valueNodeList.getLength() > 0) {
             return valueNodeList.item(0).getTextContent();
         } else {
-            return "No se encontró el valor de tipo de cambio.";
+            return "No se encontró el valor de tipo de cambio en la respuesta.";
         }
     }
 }

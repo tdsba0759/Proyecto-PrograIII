@@ -37,15 +37,16 @@ public class LogicaTipoCambio implements Servicios.ServicioLogicaTipoCambio {
      * @return El tipo de cambio como String, o null si no es válido.
      * @throws Exception Si ocurre un error al obtener el tipo de cambio desde el servicio.
      */
-    public String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email) throws Exception {
-        // Obtiene el tipo de cambio desde la capa de servicios
-        String tipoCambio = servicioTipoCambio.obtenerTipoCambio(indicador, fechaInicio, fechaFinal, nombre, subniveles, email);
-        
+    @Override
+    public String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token) throws Exception {
+        // Llama al servicio para obtener el tipo de cambio
+        String tipoCambio = servicioTipoCambio.obtenerTipoCambio(indicador, fechaInicio, fechaFinal, nombre, subniveles, email, token);
+
         // Verifica que el tipo de cambio no sea nulo o vacío
         if (tipoCambio == null || tipoCambio.isEmpty()) {
             return null; // Retorna null para indicar un valor inválido
+        } else {
+            return tipoCambio; // Retorna el tipo de cambio si no es nulo ni vacío
         }
-        
-        return tipoCambio;
     }
 }
