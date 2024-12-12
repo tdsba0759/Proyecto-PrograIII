@@ -219,33 +219,5 @@ public class LogicaTransaccion {
         accesoDatosTransacciones.agregarRegistro(linea); // Registramos la transacción en el archivo.
     }
 
-     /**
-     * Consulta el historial de transacciones de una cuenta bancaria.
-     *
-     * @param cuentaId El identificador único de la cuenta.
-     * @return Una lista de transacciones asociadas a la cuenta.
-     * @throws Exception Si no se encuentra el historial de transacciones o si
-     * ocurre un error de lectura.
-     */
-    public ArrayList<String[]> consultarHistorial(String cuentaId) throws Exception {
-        AccesoDatos accesoDatos = new AccesoDatos();
-        accesoDatos.setNombreArchivo("Historial.txt"); // Establecer el archivo de historial
-        ArrayList<String[]> registros = accesoDatos.leerRegistros(); // Leer los registros del archivo
-
-        // Filtrar las transacciones asociadas a la cuentaId proporcionada.
-        ArrayList<String[]> historialCuenta = new ArrayList<>();
-        for (String[] registro : registros) {
-            if (registro[0].equals(cuentaId)) {
-                historialCuenta.add(registro);
-            }
-        }
-
-        if (historialCuenta.isEmpty()) {
-            throw new Exception("No se encontraron transacciones para esta cuenta.");
-        }
-
-        return historialCuenta;
-    }
-
-
+   
 }
