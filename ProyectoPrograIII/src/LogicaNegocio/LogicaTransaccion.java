@@ -30,7 +30,7 @@ public class LogicaTransaccion {
      */
     public LogicaTransaccion() throws IOException {
         accesoDatos = new AccesoDatos();
-        idControl = new Idcontrol("cuentas.txt");
+        idControl = new Idcontrol("usuarios.txt");
     }
 
     /**

@@ -193,10 +193,10 @@ public class ATMApp extends javax.swing.JFrame {
 
         // Solicitar al usuario que ingrese el saldo
         String saldoStr = JOptionPane.showInputDialog("Ingresa el saldo:");
-
+        double saldoInicial;
         try {
             // Intentar convertir el texto a un valor double
-            double saldoInicial = Double.parseDouble(saldoStr);
+            saldoInicial = Double.parseDouble(saldoStr);
 
             // Crear instancia de LogicaTransaccion
             LogicaTransaccion logicaTransaccion = new LogicaTransaccion();
