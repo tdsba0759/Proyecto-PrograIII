@@ -219,7 +219,7 @@ public class LogicaTransaccion {
         accesoDatosTransacciones.agregarRegistro(linea); // Registramos la transacción en el archivo.
     }
 
-    /**
+     /**
      * Consulta el historial de transacciones de una cuenta bancaria.
      *
      * @param cuentaId El identificador único de la cuenta.
@@ -246,5 +246,6 @@ public class LogicaTransaccion {
 
         return historialCuenta;
     }
+
 
 }
