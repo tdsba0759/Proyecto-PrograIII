@@ -26,5 +26,14 @@ public interface ServicioLogicaCuenta {
      * @param saldo El saldo inicial de la nueva cuenta.
      * @throws IOException Si ocurre un error al crear la cuenta o acceder a los datos.
      */
-    void crearNuevaCuenta(String numeroCuenta,String Nombre, double saldo, String pin) throws IOException;
+    void crearNuevaCuenta(String numeroCuenta, String Nombre, double saldo, String pin) throws IOException, IllegalArgumentException, Exception;
+
+    /**
+     * Valida las credenciales de un usuario comparando el nombre de usuario y la contraseña proporcionada.
+     * 
+     * @param usuario El nombre de usuario.
+     * @param contrasena La contraseña proporcionada para validar.
+     * @return true si las credenciales son válidas, false en caso contrario.
+     */
+     boolean validarCredenciales(String usuario, String contrasena) throws IOException, Exception;
 }

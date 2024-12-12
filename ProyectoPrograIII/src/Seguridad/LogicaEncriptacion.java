@@ -5,20 +5,22 @@ import java.security.MessageDigest;
 
 /**
  * La clase LogicaEncriptacion implementa el servicio de encriptación de PINs
- * utilizando el algoritmo de hash SHA-256 para garantizar la seguridad de las contraseñas.
- * Esta clase permite encriptar un PIN y verificar si un PIN ingresado coincide con uno previamente encriptado.
+ * utilizando el algoritmo de hash SHA-256 para garantizar la seguridad de las
+ * contraseñas. Esta clase permite encriptar un PIN y verificar si un PIN
+ * ingresado coincide con uno previamente encriptado.
  */
 public class LogicaEncriptacion implements ServicioEncriptacionPIN {
-    
+
     /**
-     * Constructor de la clase LogicaEncriptacion.
-     * Inicializa una nueva instancia de la clase sin parámetros.
+     * Constructor de la clase LogicaEncriptacion. Inicializa una nueva
+     * instancia de la clase sin parámetros.
      */
-    public LogicaEncriptacion() {}
+    public LogicaEncriptacion() {
+    }
 
     /**
      * Encripta un PIN utilizando el algoritmo de hash SHA-256.
-     * 
+     *
      * @param pin El PIN que se desea encriptar.
      * @return El PIN encriptado en formato hexadecimal.
      * @throws Exception Si ocurre un error durante el proceso de encriptación.
@@ -36,14 +38,18 @@ public class LogicaEncriptacion implements ServicioEncriptacionPIN {
 
     /**
      * Verifica si un PIN ingresado coincide con un PIN previamente encriptado.
-     * 
+     *
      * @param pin El PIN ingresado por el usuario.
      * @param pinEncriptado El PIN encriptado almacenado para comparar.
-     * @return true si el PIN ingresado coincide con el PIN encriptado, false en caso contrario.
+     * @return true si el PIN ingresado coincide con el PIN encriptado, false en
+     * caso contrario.
      * @throws Exception Si ocurre un error durante la verificación.
      */
     @Override
     public boolean verificarPin(String pin, String pinEncriptado) throws Exception {
-        return encriptarPin(pin).equals(pinEncriptado);
-    } 
+        String pinEncriptadoIngresado = encriptarPin(pin);  // Encriptar el PIN ingresado
+
+        return pinEncriptadoIngresado.equals(pinEncriptado);  // Comparar los PINs
+
+    }
 }

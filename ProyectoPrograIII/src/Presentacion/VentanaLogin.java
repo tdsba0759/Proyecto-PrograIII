@@ -5,26 +5,14 @@
 package Presentacion;
 // Este paquete contiene las clases relacionadas con la interfaz de usuario o las ventanas de presentación de la aplicación.
 
-import java.io.BufferedReader;
-// Clase para leer texto de un archivo de manera eficiente, línea por línea.
-
-import java.io.FileReader;
-// Clase que permite leer el contenido de un archivo de texto.
-
-import java.io.IOException;
-// Clase para manejar excepciones que ocurren durante operaciones de entrada/salida.
-
-import Seguridad.LogicaEncriptacion;
-// Clase personalizada ubicada en el paquete Seguridad, utilizada para gestionar la lógica de encriptación de datos como contraseñas.
-
-import java.io.BufferedWriter;
-// Clase para escribir texto en un archivo de manera eficiente, añadiendo contenido sin sobrescribir.
-
-import java.io.FileWriter;
-// Clase que permite escribir texto en un archivo de texto.
 
 
 
+
+
+
+import LogicaNegocio.LogicaCuenta;
+import Servicios.ServicioLogicaCuenta;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,13 +21,15 @@ import javax.swing.JOptionPane;
  */
 public class VentanaLogin extends javax.swing.JFrame {
 
+    private String cuentaAutenticada;  // Variable para almacenar el número de cuenta autenticado
+
     /**
      * Creates new form VentanaLogin1
      */
     public VentanaLogin() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,107 +182,47 @@ public class VentanaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoActionPerformed
+        // Obtener los datos del formulario
+    String numeroCuenta = txtCuenta.getText();
+    String pin = new String(txtPin.getPassword());
 
-        // Obtiene el número de cuenta ingresado por el usuario desde el campo de texto.
-        String numeroCuenta = txtCuenta.getText();
+    // Crear una instancia del servicio de lógica de cuenta
+    ServicioLogicaCuenta servicioCuenta = new LogicaCuenta();
 
-        // Obtiene el PIN ingresado por el usuario desde el campo de contraseña.
-        // La conversión a String se realiza porque el método `getPassword` devuelve un array de caracteres.
-        String pin = new String(txtPin.getPassword());
+    try {
+        // Validar las credenciales
+        boolean loginValido = servicioCuenta.validarCredenciales(numeroCuenta, pin);  // Devolverá true o false
 
-        // Llama al método `autenticarUsuario` para verificar las credenciales ingresadas.
-        if (autenticarUsuario(numeroCuenta, pin)) {
-            // Si las credenciales son válidas:
-            // Muestra un mensaje de éxito en pantalla.
-            JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+        // Si el login es válido, abrimos la ventana principal
+        if (loginValido) {
+            cuentaAutenticada = numeroCuenta; // Guardar la cuenta autenticada
 
-            // Abre la ventana principal de la aplicación (ATMApp).
+            // Crear la instancia de la ventana principal (ATMApp)
             ATMApp principal = new ATMApp();
-            principal.setVisible(true);
 
-            // Cierra la ventana de inicio de sesión actual para evitar que quede abierta.
-            this.dispose();
+            // Pasar la cuenta autenticada a la ventana principal
+            principal.setCuentaAutenticada(cuentaAutenticada);
+
+            // Mostrar la ventana principal
+            principal.setVisible(true);
+            this.dispose();  // Cierra la ventana de login
         } else {
-            // Si las credenciales son incorrectas:
-            // Muestra un mensaje de error indicando que el número de cuenta o el PIN son incorrectos.
+            // Si las credenciales no son correctas, muestra el error
             JOptionPane.showMessageDialog(this, "Número de cuenta o PIN incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } catch (Exception e) {
+        // Si ocurre un error en el proceso, muestra un mensaje de error
+        JOptionPane.showMessageDialog(this, "Hubo un problema al validar el login: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnIngresoActionPerformed
 
     private void btnIngreso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngreso1ActionPerformed
-Credenciales cred = new Credenciales();
-cred.setVisible(true);
-this.dispose(); 
-cred.setLocationRelativeTo(null);
+        Credenciales cred = new Credenciales();
+        cred.setVisible(true);
+        this.dispose();
+        cred.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnIngreso1ActionPerformed
 
-    private boolean autenticarUsuario(String numeroCuenta, String pinIngresado) {
-    try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
-        // Abre el archivo "usuarios.txt" y permite leerlo línea por línea.
-
-        String linea; // Variable para almacenar cada línea leída del archivo.
-        LogicaEncriptacion encriptacion = new LogicaEncriptacion(); // Instancia para manejar la encriptación y verificación del PIN.
-
-        while ((linea = br.readLine()) != null) { 
-            // Itera sobre cada línea del archivo mientras no sea null (fin del archivo).
-
-            String[] partes = linea.split(","); 
-            // Divide la línea en partes separadas por comas (formato esperado: "numeroCuenta,nombre,pinEncriptado").
-
-            String cuenta = partes[0]; // Obtiene el número de cuenta de la primera posición.
-            String pinEncriptado = partes[2]; // Obtiene el PIN encriptado de la tercera posición.
-
-            if (cuenta.equals(numeroCuenta) && encriptacion.verificarPin(pinIngresado, pinEncriptado)) {
-                // Verifica si el número de cuenta coincide y si el PIN ingresado es válido tras encriptarlo.
-                return true; // Retorna true si las credenciales coinciden.
-            }
-        }
-    } catch (IOException e) {
-        // Maneja errores relacionados con la lectura del archivo.
-        JOptionPane.showMessageDialog(this, "Error al leer el archivo de usuarios.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        // Maneja cualquier otro error (como problemas con la encriptación).
-        JOptionPane.showMessageDialog(this, "Error al verificar el PIN.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    // Retorna false si no se encontró un usuario válido o si ocurrió un error.
-    return false;
-}
-    
-   /**
- * Acción ejecutada cuando se hace clic en el botón "Ingresar".
- * Valida las credenciales del usuario (número de cuenta y PIN) y procede con el inicio de sesión.
- * 
- * @param evt El evento que desencadena la acción del botón.
- */
-
-private boolean cuentaExiste(String numeroCuenta) {
-    try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
-        // Abre el archivo "usuarios.txt" para lectura, utilizando BufferedReader para eficiencia.
-        
-        String linea; // Variable para almacenar cada línea leída del archivo.
-
-        while ((linea = br.readLine()) != null) {
-            // Lee el archivo línea por línea hasta que no queden más líneas (línea == null).
-
-            String[] partes = linea.split(",");
-            // Divide la línea en partes utilizando la coma como separador.
-            // Formato esperado: "numeroCuenta,nombre,pinEncriptado".
-
-            if (partes[0].equals(numeroCuenta)) {
-                // Compara el número de cuenta en el archivo con el número de cuenta proporcionado.
-                return true; // Retorna true si se encuentra una coincidencia.
-            }
-        }
-    } catch (IOException e) {
-        // Maneja cualquier error relacionado con la lectura del archivo.
-        JOptionPane.showMessageDialog(this, "Error al verificar el número de cuenta.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    // Si no se encuentra el número de cuenta o ocurre un error, retorna false.
-    return false;
-}    
-    
     /**
      * @param args the command line arguments
      */

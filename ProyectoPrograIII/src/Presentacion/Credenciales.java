@@ -5,6 +5,8 @@ package Presentacion;
 import LogicaNegocio.LogicaCuenta;
 import Servicios.ServicioLogicaCuenta;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 // Importa la clase `IOException`, que se utiliza para manejar errores relacionados con la entrada/salida, como problemas al leer o escribir archivos.
 import javax.swing.JOptionPane;
 // Importa la clase `JOptionPane`, que se utiliza para mostrar cuadros de diálogo al usuario, como mensajes de error, advertencia o confirmación.
@@ -153,6 +155,8 @@ public class Credenciales extends javax.swing.JFrame {
         } catch (IOException ex) {
             // Mostrar mensaje de error en caso de excepción
             JOptionPane.showMessageDialog(this, "Error al registrar el usuario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            Logger.getLogger(Credenciales.class.getName()).log(Level.SEVERE, null, ex);
         }
         // Cerrar la ventana actual
         this.dispose();

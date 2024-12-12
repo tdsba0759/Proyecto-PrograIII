@@ -1,13 +1,12 @@
 package Entidades;
 
 /**
- * Clase abstracta que representa una cuenta bancaria con un número de cuenta
- * y un saldo. Proporciona métodos para obtener y establecer estos valores,
- * así como un método abstracto para validar retiros.
+ * Clase que representa una cuenta bancaria. Contiene un número de cuenta,
+ * saldo, nombre del usuario, PIN encriptado y un método para validar retiros.
  * 
  * @author Joshua
  */
-public abstract class Cuenta {
+public class Cuenta {
 
     /**
      * Número único que identifica la cuenta.
@@ -20,19 +19,34 @@ public abstract class Cuenta {
     private double saldo;
 
     /**
+     * Nombre del usuario asociado a la cuenta.
+     */
+    private String nombre;
+
+    /**
+     * PIN encriptado asociado a la cuenta.
+     */
+    private String pinEncriptado;
+
+    /**
      * Constructor por defecto para la clase {@code Cuenta}.
      */
     public Cuenta() {}
 
     /**
-     * Constructor que inicializa la cuenta con un número y un saldo inicial.
+     * Constructor que inicializa la cuenta con un número de cuenta, saldo,
+     * nombre de usuario y PIN encriptado.
      *
      * @param numeroCuenta Número de la cuenta.
      * @param saldo Saldo inicial de la cuenta.
+     * @param nombre Nombre del usuario.
+     * @param pinEncriptado PIN encriptado del usuario.
      */
-    public Cuenta(String numeroCuenta, double saldo) {
+    public Cuenta(String numeroCuenta, double saldo, String nombre, String pinEncriptado) {
         this.numeroCuenta = numeroCuenta;
         this.saldo = saldo;
+        this.nombre = nombre;
+        this.pinEncriptado = pinEncriptado;
     }
 
     /**
@@ -72,11 +86,52 @@ public abstract class Cuenta {
     }
 
     /**
-     * Método abstracto que valida si un retiro es posible con base en el monto especificado.
-     * La implementación específica depende de la subclase.
+     * Obtiene el nombre del usuario asociado a la cuenta.
      *
+     * @return El nombre del usuario.
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Establece el nombre del usuario.
+     *
+     * @param nombre El nombre del usuario a asignar.
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Obtiene el PIN encriptado asociado a la cuenta.
+     *
+     * @return El PIN encriptado.
+     */
+    public String getPinEncriptado() {
+        return pinEncriptado;
+    }
+
+    /**
+     * Establece el PIN encriptado de la cuenta.
+     *
+     * @param pinEncriptado El PIN encriptado a asignar.
+     */
+    public void setPinEncriptado(String pinEncriptado) {
+        this.pinEncriptado = pinEncriptado;
+    }
+
+    /**
+     * Método para validar si un retiro es posible con base en el monto especificado.
+     * 
      * @param monto Monto a retirar.
      * @return {@code true} si el retiro es válido; {@code false} en caso contrario.
      */
-    public abstract boolean validarRetiro(double monto);
+    public boolean validarRetiro(double monto) {
+        // Lógica para validar el retiro, por ejemplo, verificando el saldo disponible
+        if (monto <= saldo) {
+            return true;
+        }
+        return false;
+    }
 }
