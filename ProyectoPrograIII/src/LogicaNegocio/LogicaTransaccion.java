@@ -61,33 +61,33 @@ public class LogicaTransaccion {
      * error.
      */
     public void agregarSaldo(String cuentaId, double monto) throws Exception {
-      ArrayList<String[]> registros = accesoDatos.leerRegistros();
-    boolean cuentaEncontrada = false;
+        ArrayList<String[]> registros = accesoDatos.leerRegistros();
+        boolean cuentaEncontrada = false;
 
-    // Recorremos los registros solo una vez
-    for (String[] registro : registros) {
-        if (registro[0].equals(cuentaId)) {
-            double saldoActual = Double.parseDouble(registro[2]);
-            double nuevoSaldo = saldoActual + monto;
-            registro[2] = String.valueOf(nuevoSaldo); // Actualiza el saldo en el registro
-            cuentaEncontrada = true;
-            break;
+        // Recorremos los registros solo una vez
+        for (String[] registro : registros) {
+            if (registro[0].equals(cuentaId)) {
+                double saldoActual = Double.parseDouble(registro[2]);
+                double nuevoSaldo = saldoActual + monto;
+                registro[2] = String.valueOf(nuevoSaldo); // Actualiza el saldo en el registro
+                cuentaEncontrada = true;
+                break;
+            }
         }
-    }
 
-    if (cuentaEncontrada) {
-        // Escribimos solo el registro modificado, sin necesidad de recorrer todos los registros
-        // Reescribimos el archivo solo si ha habido un cambio en los registros
-        accesoDatos.agregarRegistro(String.join(",", registros.get(registros.indexOf(registros.stream()
-                .filter(reg -> reg[0].equals(cuentaId))
-                .findFirst()
-                .get())))); // Escribimos el nuevo registro modificado
+        if (cuentaEncontrada) {
+            // Escribimos solo el registro modificado, sin necesidad de recorrer todos los registros
+            // Reescribimos el archivo solo si ha habido un cambio en los registros
+            accesoDatos.agregarRegistro(String.join(",", registros.get(registros.indexOf(registros.stream()
+                    .filter(reg -> reg[0].equals(cuentaId))
+                    .findFirst()
+                    .get())))); // Escribimos el nuevo registro modificado
 
-        // Registramos la transacción en el historial
-        registrarHistorial(cuentaId, monto, "Ingreso");
-    } else {
-        throw new Exception("Cuenta no encontrada.");
-    }
+            // Registramos la transacción en el historial
+            registrarHistorial(cuentaId, monto, "Ingreso");
+        } else {
+            throw new Exception("Cuenta no encontrada.");
+        }
     }
 
     /**
@@ -217,7 +217,40 @@ public class LogicaTransaccion {
         AccesoDatos accesoDatosTransacciones = new AccesoDatos();
         accesoDatosTransacciones.setNombreArchivo(archivoHistorial); // Establecemos el archivo donde se guardará la transacción.
         accesoDatosTransacciones.agregarRegistro(linea); // Registramos la transacción en el archivo.
+
     }
 
-   
+    /**
+     * Consulta el historial de transacciones de una cuenta bancaria.
+     *
+     * @param cuentaId El identificador único de la cuenta.
+     * @return Una lista de transacciones asociadas a la cuenta.
+     * @throws Exception Si no se encuentra el historial de transacciones o si
+     * ocurre un error de lectura.
+     */
+    public ArrayList<String[]> consultarHistorial(String cuentaId) throws Exception {
+        // Crear instancia de AccesoDatos y establecer el archivo de historial
+        AccesoDatos accesoDatos = new AccesoDatos();
+        accesoDatos.setNombreArchivo("Historial.txt");  // Establecer el archivo de historial
+
+        // Leer los registros del archivo
+        ArrayList<String[]> registros = accesoDatos.leerRegistros();
+
+        // Filtrar las transacciones asociadas a la cuentaId proporcionada
+        ArrayList<String[]> historialCuenta = new ArrayList<>();
+        for (String[] registro : registros) {
+            if (registro[0].equals(cuentaId)) {
+                historialCuenta.add(registro);  // Agregar la transacción al historial de la cuenta
+            }
+        }
+
+        // Si no se encontraron transacciones para la cuenta
+        if (historialCuenta.isEmpty()) {
+            throw new Exception("No se encontraron transacciones para esta cuenta.");
+        }
+
+        // Retornar el historial de transacciones de la cuenta
+        return historialCuenta;
+    }
+
 }
