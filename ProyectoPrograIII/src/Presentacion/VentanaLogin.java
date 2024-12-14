@@ -19,7 +19,8 @@ import javax.swing.JOptionPane;
 public class VentanaLogin extends javax.swing.JFrame {
 
     private String cuentaAutenticada;  // Variable para almacenar el número de cuenta autenticado
-
+private String nombre;
+    private String pin;
     /**
      * Creates new form VentanaLogin1
      */
@@ -199,7 +200,7 @@ public class VentanaLogin extends javax.swing.JFrame {
             ATMApp principal = new ATMApp();
 
             // Pasar la cuenta autenticada a la ventana principal
-            principal.setCuentaAutenticada(cuentaAutenticada);
+            principal.setCuentaAutenticada(cuentaAutenticada, nombre, pin);
 
             // Mostrar la ventana principal
             principal.setVisible(true);

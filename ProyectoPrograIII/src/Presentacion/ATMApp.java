@@ -4,7 +4,6 @@
  */
 package Presentacion;
 
-import LogicaNegocio.LogicaCuenta;
 import LogicaNegocio.LogicaTransaccion;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +20,8 @@ public class ATMApp extends javax.swing.JFrame {
 
     // Variable para almacenar la cuenta autenticada
     private String cuentaAutenticada;
-
+    private String nombre;
+    private String pin;
     /**
      * Creates new form MenuPrincipal
      */
@@ -29,8 +29,10 @@ public class ATMApp extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void setCuentaAutenticada(String cuenta) {
+    public void setCuentaAutenticada(String cuenta, String nombre, String pin) {
         this.cuentaAutenticada = cuenta;
+        this.nombre = nombre;
+        this.pin = pin;
     }
 
     /**
@@ -194,6 +196,7 @@ public class ATMApp extends javax.swing.JFrame {
         // Solicitar al usuario que ingrese el saldo
         String saldoStr = JOptionPane.showInputDialog("Ingresa el saldo:");
         double saldoInicial;
+ 
         try {
             // Intentar convertir el texto a un valor double
             saldoInicial = Double.parseDouble(saldoStr);
@@ -202,7 +205,7 @@ public class ATMApp extends javax.swing.JFrame {
             LogicaTransaccion logicaTransaccion = new LogicaTransaccion();
 
             // Llamar al método de agregar saldo (se asume que 'cuentaAutenticada' es el ID de la cuenta autenticada)
-            logicaTransaccion.agregarSaldo(cuentaAutenticada, saldoInicial); // Verifica que la cuenta exista
+            logicaTransaccion.agregarSaldo(cuentaAutenticada, nombre, saldoInicial, pin); // Verifica que la cuenta exista
 
             // Si todo es exitoso, mostrar mensaje de éxito
             JOptionPane.showMessageDialog(null, "Saldo agregado con éxito.");

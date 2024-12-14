@@ -40,11 +40,11 @@ public class LogicaTransaccion {
      * @return El saldo actual de la cuenta.
      * @throws Exception Si no se encuentra la cuenta.
      */
-    public double consultarSaldo(String cuentaId) throws Exception {
+    public double consultarSaldo(String numeroCuenta, String Nombre, double saldo, String pin) throws Exception {
         ArrayList<String[]> registros = accesoDatos.leerRegistros();
 
         for (String[] registro : registros) {
-            if (registro[0].equals(cuentaId)) {
+            if (registro[0].equals(numeroCuenta)) {
                 return Double.parseDouble(registro[2]);
             }
         }
@@ -60,15 +60,15 @@ public class LogicaTransaccion {
      * @throws Exception Si no se encuentra la cuenta o si ocurre algún otro
      * error.
      */
-    public void agregarSaldo(String cuentaId, double monto) throws Exception {
+    public void agregarSaldo(String numeroCuenta, String Nombre, double saldo, String pin) throws Exception {
         ArrayList<String[]> registros = accesoDatos.leerRegistros();
         boolean cuentaEncontrada = false;
 
         // Recorremos los registros solo una vez
         for (String[] registro : registros) {
-            if (registro[0].equals(cuentaId)) {
+            if (registro[0].equals(numeroCuenta)) {
                 double saldoActual = Double.parseDouble(registro[2]);
-                double nuevoSaldo = saldoActual + monto;
+                double nuevoSaldo = saldoActual + saldo;
                 registro[2] = String.valueOf(nuevoSaldo); // Actualiza el saldo en el registro
                 cuentaEncontrada = true;
                 break;
@@ -79,12 +79,12 @@ public class LogicaTransaccion {
             // Escribimos solo el registro modificado, sin necesidad de recorrer todos los registros
             // Reescribimos el archivo solo si ha habido un cambio en los registros
             accesoDatos.agregarRegistro(String.join(",", registros.get(registros.indexOf(registros.stream()
-                    .filter(reg -> reg[0].equals(cuentaId))
+                    .filter(reg -> reg[0].equals(numeroCuenta))
                     .findFirst()
                     .get())))); // Escribimos el nuevo registro modificado
 
             // Registramos la transacción en el historial
-            registrarHistorial(cuentaId, monto, "Ingreso");
+            registrarHistorial(numeroCuenta, saldo, "Ingreso");
         } else {
             throw new Exception("Cuenta no encontrada.");
         }
@@ -99,15 +99,15 @@ public class LogicaTransaccion {
      * @throws Exception Si no se encuentra la cuenta o si el saldo es
      * insuficiente.
      */
-    public void quitarSaldo(String cuentaId, double monto) throws Exception {
+    public void quitarSaldo(String numeroCuenta, String Nombre, double saldo, String pin) throws Exception {
         ArrayList<String[]> registros = accesoDatos.leerRegistros();
         boolean cuentaEncontrada = false;
 
         for (String[] registro : registros) {
-            if (registro[0].equals(cuentaId)) {
+            if (registro[0].equals(numeroCuenta)) {
                 double saldoActual = Double.parseDouble(registro[2]);
-                if (saldoActual >= monto) {
-                    double nuevoSaldo = saldoActual - monto;
+                if (saldoActual >= saldo) {
+                    double nuevoSaldo = saldoActual - saldo;
                     registro[2] = String.valueOf(nuevoSaldo); // Actualiza el saldo en el registro.
                     cuentaEncontrada = true;
                 } else {
@@ -122,7 +122,7 @@ public class LogicaTransaccion {
                 accesoDatos.agregarRegistro(String.join(",", registro));
             }
 
-            registrarHistorial(cuentaId, monto, "Retiro");
+            registrarHistorial(numeroCuenta, saldo, "Retiro");
         } else {
             throw new Exception("Cuenta no encontrada.");
         }
