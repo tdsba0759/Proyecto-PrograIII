@@ -67,7 +67,7 @@
             String pinEncriptado = encriptacion.encriptarPin(pin);
             String nuevaCuenta = numeroCuenta + "," + Nombre + "," + saldo + "," + pinEncriptado;
             accesoDatos.agregarRegistro(nuevaCuenta);
-            System.out.println("Nueva cuenta creada exitosamente: " + numeroCuenta);
+            
         }
 
         /**

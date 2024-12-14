@@ -209,7 +209,7 @@ public class ATMApp extends javax.swing.JFrame {
 
         } catch (NumberFormatException ex) {
             // Si el formato del saldo es incorrecto (no es un número válido)
-            JOptionPane.showMessageDialog(null, "Por favor ingrese un monto válido para el saldo inicial.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un monto válido para el saldo.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             // Captura cualquier otra excepción que ocurra durante el proceso
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
