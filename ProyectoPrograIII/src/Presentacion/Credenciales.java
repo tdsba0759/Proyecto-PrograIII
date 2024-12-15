@@ -3,6 +3,7 @@ package Presentacion;
 // Importaciones necesarias para el funcionamiento del programa
 
 import LogicaNegocio.LogicaCuenta;
+import Seguridad.LogicaEncriptacion;
 import Servicios.ServicioLogicaCuenta;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -39,7 +40,7 @@ public class Credenciales extends javax.swing.JFrame {
         txtNumeroCuentaRegistro = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtPinRegistro = new javax.swing.JTextField();
-        btnGenerar1 = new javax.swing.JButton();
+        btnGenerar = new javax.swing.JButton();
         btnCerrarRegistro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,13 +70,13 @@ public class Credenciales extends javax.swing.JFrame {
         });
         jPanel1.add(txtPinRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 120, -1));
 
-        btnGenerar1.setText("Generar ");
-        btnGenerar1.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerar.setText("Generar ");
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerar1ActionPerformed(evt);
+                btnGenerarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGenerar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
+        jPanel1.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
 
         btnCerrarRegistro.setText("Cerrar");
         btnCerrarRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -121,50 +122,60 @@ public class Credenciales extends javax.swing.JFrame {
      *
      * @param evt Evento que dispara esta acción (clic en el botón "Generar").
      */
-    private void btnGenerar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerar1ActionPerformed
-        String numeroCuenta = txtNumeroCuentaRegistro.getText().trim();
-        String pin = txtPinRegistro.getText().trim();
-        if (numeroCuenta.isEmpty() || pin.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "El número de cuenta y el PIN son obligatorios.", "Error", JOptionPane.WARNING_MESSAGE);
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+    String numeroCuenta = txtNumeroCuentaRegistro.getText().trim();
+    String pin = txtPinRegistro.getText().trim();
+
+    if (numeroCuenta.isEmpty() || pin.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "El número de cuenta y el PIN son obligatorios.", "Error", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Solicitar el nombre del usuario
+    String nombreUsuario = JOptionPane.showInputDialog(this, "Ingrese el nombre del usuario:");
+
+    // Validar que se haya proporcionado un nombre
+    if (nombreUsuario == null || nombreUsuario.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "El nombre es obligatorio. No se generará ninguna credencial.", "Error", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        // Instanciar la clase que implementa la interfaz ServicioLogicaCuenta
+        ServicioLogicaCuenta servicio = new LogicaCuenta();
+
+        // Verificar si la cuenta ya existe
+        if (servicio.existeCuenta(numeroCuenta)) {
+            JOptionPane.showMessageDialog(this, "El número de cuenta ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre del usuario:");
+        // Encriptar el PIN ingresado
+        LogicaEncriptacion logicaEncriptacion = new LogicaEncriptacion();
+        String hashPin = logicaEncriptacion.encriptarPin(pin);
 
-        // Validar que se hayan proporcionado todos los datos necesarios
-        if (nombre == null || nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "El nombre es obligatorio. No se generará ninguna credencial.", "Error", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        // Crear el registro temporalmente
+        String registroTemporal = numeroCuenta + "," + nombreUsuario + "," + hashPin;
 
-        try {
-            // Instanciar la clase que implementa la interfaz ServicioLogicaCuenta
-            ServicioLogicaCuenta servicio = new LogicaCuenta(); // Aquí se hace la instanciación
 
-            // Verificar si la cuenta ya existe
-            if (servicio.existeCuenta(numeroCuenta)) {
-                JOptionPane.showMessageDialog(this, "El número de cuenta ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+        // Registrar la nueva cuenta en el archivo
+        servicio.crearNuevaCuenta(numeroCuenta, nombreUsuario, pin);
 
-            // Registrar la nueva cuenta con un saldo inicial de 0
-            servicio.crearNuevaCuenta(numeroCuenta, nombre, 0, pin); // Asegúrate de que este método esté correctamente implementado
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    } catch (IOException ex) {
+        JOptionPane.showMessageDialog(this, "Error al registrar el usuario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception ex) {
+        Logger.getLogger(Credenciales.class.getName()).log(Level.SEVERE, null, ex);
+    }
 
-            // Mostrar mensaje de éxito
-            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException ex) {
-            // Mostrar mensaje de error en caso de excepción
-            JOptionPane.showMessageDialog(this, "Error al registrar el usuario: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(Credenciales.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // Cerrar la ventana actual
-        this.dispose();
+    // Cerrar la ventana actual
+    this.dispose();
 
-        // Abrir la ventana de login
-        VentanaLogin ventanaLogin = new VentanaLogin();
-        ventanaLogin.setVisible(true);
-    }//GEN-LAST:event_btnGenerar1ActionPerformed
+    // Abrir la ventana de login
+    VentanaLogin ventanaLogin = new VentanaLogin();
+    ventanaLogin.setVisible(true);
+    }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCerrarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarRegistroActionPerformed
         // Cerrar la ventana actual
@@ -212,7 +223,7 @@ public class Credenciales extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrarRegistro;
-    private javax.swing.JButton btnGenerar1;
+    private javax.swing.JButton btnGenerar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

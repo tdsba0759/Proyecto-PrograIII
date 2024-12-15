@@ -58,17 +58,23 @@
          * @throws Exception Si ocurre cualquier otro error.
          */
         @Override
-        public void crearNuevaCuenta(String numeroCuenta, String Nombre, double saldo, String pin) throws IOException, IllegalArgumentException, Exception {
+        public void crearNuevaCuenta(String numeroCuenta, String nombreUsuario, String pin) throws IOException, IllegalArgumentException, Exception {
             if (existeCuenta(numeroCuenta)) {
                 throw new IllegalArgumentException("El número de cuenta ya existe.");
             }
 
             LogicaEncriptacion encriptacion = new LogicaEncriptacion();
             String pinEncriptado = encriptacion.encriptarPin(pin);
-            String nuevaCuenta = numeroCuenta + "," + Nombre + "," + saldo + "," + pinEncriptado;
+
+            // Crear el registro
+            String nuevaCuenta = numeroCuenta + "," + nombreUsuario + "," + pinEncriptado;
+
+            // Guardar el registro en el archivo
             accesoDatos.agregarRegistro(nuevaCuenta);
-            
         }
+
+
+
 
         /**
          * Valida las credenciales de usuario contra un archivo de texto.
@@ -79,28 +85,23 @@
          * @throws IOException Si ocurre un error al acceder a los datos.
          * @throws Exception Si ocurre un error durante la verificación.
          */
-       @Override
-    public boolean validarCredenciales(String usuario, String contrasena) throws IOException, Exception {
-        ArrayList<String[]> registros = accesoDatos.leerRegistros();
-        LogicaEncriptacion encriptacion = new LogicaEncriptacion();
+    @Override
+    public boolean validarCredenciales(String cedula, String pin) throws IOException, Exception {
+        AccesoDatos accesoDatos = new AccesoDatos();
 
-        for (String[] datosUsuario : registros) {
-            // Verificar que el arreglo tenga al menos 4 elementos
-            if (datosUsuario.length >= 4) {
-                String usuarioGuardado = datosUsuario[0].trim();
-                String contrasenaGuardada = datosUsuario[3].trim(); // Acceder al PIN encriptado
+        // Encriptar el PIN ingresado por el usuario utilizando LogicaEncriptacion
+        LogicaEncriptacion logicaEncriptacion = new LogicaEncriptacion();
+        String hashPin = logicaEncriptacion.encriptarPin(pin);
 
-                if (usuario.equals(usuarioGuardado)) {
-                    // Verificar si el PIN ingresado coincide con el PIN encriptado
-                    if (encriptacion.verificarPin(contrasena, contrasenaGuardada)) {
-                        return true;
-                    }
-                }
-            } else {
-                System.out.println("Error: el registro de usuario no tiene el formato correcto.");
+        // Leer usuarios y verificar credenciales
+        ArrayList<String[]> usuarios = accesoDatos.leerRegistros();
+        for (String[] usuario : usuarios) {
+            if (usuario[0].equals(cedula) && usuario[2].equals(hashPin)) {
+                return true; // Autenticación exitosa
             }
         }
-        return false;
+        return false; // Credenciales incorrectas
     }
+
 
     }

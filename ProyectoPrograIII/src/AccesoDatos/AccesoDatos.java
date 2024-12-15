@@ -104,13 +104,21 @@ public class AccesoDatos implements Servicios.ServiciosaAccesoDatos {
      * @param linea La línea que representa el nuevo registro a agregar.
      * @throws IOException Si ocurre un error al escribir en el archivo.
      */
-    @Override
-    public void agregarRegistro(String linea) throws IOException {
-        try (BufferedWriter objBw = new BufferedWriter(new FileWriter(this.getNombreArchivo(), true))) {
-            objBw.write(linea);
-            objBw.newLine();
-        }
-    }
+        @Override
+      public void agregarRegistro(String linea) throws IOException {
+          if (linea == null || linea.trim().isEmpty()) {
+              System.err.println("Intento de escribir una línea vacía ignorado.");
+              return; // No escribir líneas vacías
+          }
+
+          BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt", true)); // `true` para agregar al final
+          writer.write(linea);
+          writer.newLine();
+          writer.close();
+      }
+
+
+
 
     /**
      * Lee todos los registros del archivo y los devuelve como una lista de arrays de cadenas.
@@ -119,18 +127,30 @@ public class AccesoDatos implements Servicios.ServiciosaAccesoDatos {
      * @throws FileNotFoundException Si el archivo especificado no existe.
      * @throws IOException Si ocurre un error al leer el archivo.
      */
-    @Override
-    public ArrayList<String[]> leerRegistros() throws FileNotFoundException, IOException {
-        ArrayList<String[]> listaRegistros = new ArrayList<>();
+        @Override
+        public ArrayList<String[]> leerRegistros() throws IOException {
+            ArrayList<String[]> registros = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"));
+            String linea;
 
-        try (BufferedReader objBr = new BufferedReader(new FileReader(this.getNombreArchivo()))) {
-            while ((this.registro = objBr.readLine()) != null) {
-                String[] datos = this.registro.split(",");
-                listaRegistros.add(datos);
+            while ((linea = reader.readLine()) != null) {
+                linea = linea.trim();
+                if (!linea.isEmpty()) { // Evita procesar líneas vacías
+                    registros.add(linea.split(",")); // Divide la línea en columnas
+                }
             }
-            return listaRegistros;
+
+            reader.close();
+            return registros;
         }
-    }
+        
+
+        
+
+
+
+
+
 
     /**
      * Modifica o elimina un registro en el archivo basado en el ID especificado.
@@ -178,4 +198,25 @@ public class AccesoDatos implements Servicios.ServiciosaAccesoDatos {
             throw new IOException("No se puede renombrar el archivo temporal.");
         }
     }
+
+@Override
+public void escribirRegistros(ArrayList<String[]> registros) throws IOException {
+    // Asegúrate de que el nombre del archivo esté definido
+    if (nombreArchivo == null || nombreArchivo.isEmpty()) {
+        throw new IOException("El nombre del archivo no está definido.");
+    }
+
+    // Abrir el archivo en modo sobrescritura
+    BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo, false)); // 'false' para sobrescribir
+
+    // Escribir cada registro en el archivo
+    for (String[] registro : registros) {
+        writer.write(String.join(",", registro)); // Convierte el array en una línea CSV
+        writer.newLine(); // Agregar salto de línea
+    }
+
+    // Cerrar el escritor
+    writer.close();
+}
+
 }

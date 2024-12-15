@@ -25,8 +25,10 @@ public class ATMApp extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public ATMApp() {
+    public ATMApp() throws IOException {
         initComponents();
+    setLocationRelativeTo(null); // Centrar ventana
+    logicaTransaccion = new LogicaTransaccion(); // Inicializar la instancia
     }
 
     public void setCuentaAutenticada(String cuenta, String nombre, String pin) {
@@ -48,12 +50,8 @@ public class ATMApp extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblmovimientos = new javax.swing.JTable();
-        btnHisotrial = new javax.swing.JButton();
-        btnRegistro = new javax.swing.JButton();
-        btnCerrar = new javax.swing.JButton();
-        btnOperaciones = new javax.swing.JButton();
-        btnIngreso = new javax.swing.JButton();
-        btnTransferir1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnDepositar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -107,173 +105,87 @@ public class ATMApp extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnHisotrial.setText("Movimientos");
-        btnHisotrial.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnDepositar.setText("Depositar");
+        btnDepositar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHisotrialActionPerformed(evt);
+                btnDepositarActionPerformed(evt);
             }
         });
+        jPanel2.add(btnDepositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 110, 40));
 
-        btnRegistro.setText("Depositar");
-        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistroActionPerformed(evt);
-            }
-        });
-
-        btnCerrar.setText("Cerrar sesion");
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-
-        btnOperaciones.setText("Consultar");
-
-        btnIngreso.setText("Retirar");
-        btnIngreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresoActionPerformed(evt);
-            }
-        });
-
-        btnTransferir1.setText("Transferir");
-        btnTransferir1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTransferir1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnTransferir1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnHisotrial, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTransferir1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHisotrial, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 210));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+    private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
+            // Solicitar el monto al usuario
+    String montoStr = JOptionPane.showInputDialog(this, "Ingrese el monto a depositar:");
 
-        // Solicitar al usuario que ingrese el saldo
-        String saldoStr = JOptionPane.showInputDialog("Ingresa el saldo:");
-        double saldoInicial;
- 
-        try {
-            // Intentar convertir el texto a un valor double
-            saldoInicial = Double.parseDouble(saldoStr);
+    // Validar que el usuario no cancele o deje vacío el campo
+    if (montoStr == null || montoStr.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Debe ingresar un monto.", "Error", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
 
-            // Crear instancia de LogicaTransaccion
-            LogicaTransaccion logicaTransaccion = new LogicaTransaccion();
+    try {
+        // Mostrar el monto ingresado para depuración
+        System.out.println("Monto ingresado (antes de convertir): " + montoStr);
 
-            // Llamar al método de agregar saldo (se asume que 'cuentaAutenticada' es el ID de la cuenta autenticada)
-            logicaTransaccion.agregarSaldo(cuentaAutenticada, nombre, saldoInicial, pin); // Verifica que la cuenta exista
+        // Reemplazar comas por puntos si es necesario (para manejar formatos regionales)
+        montoStr = montoStr.replace(",", ".");
 
-            // Si todo es exitoso, mostrar mensaje de éxito
-            JOptionPane.showMessageDialog(null, "Saldo agregado con éxito.");
-
-        } catch (NumberFormatException ex) {
-            // Si el formato del saldo es incorrecto (no es un número válido)
-            JOptionPane.showMessageDialog(null, "Por favor ingrese un monto válido para el saldo.", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
-            // Captura cualquier otra excepción que ocurra durante el proceso
-            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }//GEN-LAST:event_btnRegistroActionPerformed
-
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        VentanaLogin login = new VentanaLogin();
-        login.setVisible(true);
-        this.dispose();
-
-    }//GEN-LAST:event_btnCerrarActionPerformed
-
-    private void btnIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoActionPerformed
-
-    }//GEN-LAST:event_btnIngresoActionPerformed
-
-    private void btnHisotrialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHisotrialActionPerformed
-        // Verificar si la cuenta está autenticada
-        if (cuentaAutenticada == null || cuentaAutenticada.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay cuenta autenticada.", "Error", JOptionPane.WARNING_MESSAGE);
+        // Validar que el monto sea un número válido
+        if (!montoStr.matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        try {
-            // Crear una instancia de LogicaTransaccion
-            LogicaTransaccion logicaHistorial = new LogicaTransaccion();
+        // Convertir el monto a double
+        double monto = Double.parseDouble(montoStr);
 
-            // Obtener los movimientos del historial usando el número de cuenta autenticada
-            ArrayList<String[]> movimientos = logicaHistorial.consultarHistorial(cuentaAutenticada);
-
-            // Si no se encontraron movimientos
-            if (movimientos.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No se encontraron movimientos para esta cuenta.", "Error", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            // Crear un modelo de tabla con los movimientos
-            DefaultTableModel model = (DefaultTableModel) tblmovimientos.getModel();
-
-            // Limpiar las filas anteriores en la tabla
-            model.setRowCount(0);
-
-            // Agregar las filas a la tabla con los datos de los movimientos
-            for (String[] movimiento : movimientos) {
-                model.addRow(movimiento);  // Cada movimiento debe ser un arreglo de String
-            }
-
-        } catch (IOException ex) {
-            // Mostrar mensaje de error si ocurre alguna excepción
-            JOptionPane.showMessageDialog(this, "Error al cargar el historial: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
-            Logger.getLogger(ATMApp.class.getName()).log(Level.SEVERE, null, ex);
+        // Validar que el monto sea positivo
+        if (monto <= 0) {
+            JOptionPane.showMessageDialog(this, "El monto debe ser un número positivo.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-    }//GEN-LAST:event_btnHisotrialActionPerformed
 
-    private void btnTransferir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferir1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTransferir1ActionPerformed
+        // Crear una instancia de LogicaTransaccion
+        LogicaTransaccion logicaTransaccion = new LogicaTransaccion();
 
+        // Obtener el saldo actual de la cuenta
+        double saldoAnterior = logicaTransaccion.consultarSaldo(cuentaAutenticada);
+
+        // Calcular el saldo nuevo
+        double saldoNuevo = saldoAnterior + monto;
+
+        // Registrar el depósito
+        logicaTransaccion.depositar(cuentaAutenticada, monto, saldoAnterior, saldoNuevo);
+
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(this,
+                "Depósito exitoso.\nSaldo anterior: " + saldoAnterior + "\nSaldo nuevo: " + saldoNuevo,
+                "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (NumberFormatException ex) {
+        // Manejar error en la conversión del monto a número
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        ex.printStackTrace();
+    } catch (Exception ex) {
+        // Manejar cualquier otra excepción
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        ex.printStackTrace();
+    }
+    }//GEN-LAST:event_btnDepositarActionPerformed
+
+    
+    private final LogicaTransaccion logicaTransaccion;
+    
     /**
      * @param args the command line arguments
      */
@@ -304,20 +216,20 @@ public class ATMApp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ATMApp().setVisible(true);
+                try {
+                    new ATMApp().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(ATMApp.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog MovimientosDialog;
-    private javax.swing.JButton btnCerrar;
-    private javax.swing.JButton btnHisotrial;
-    private javax.swing.JButton btnIngreso;
-    private javax.swing.JButton btnOperaciones;
-    private javax.swing.JButton btnRegistro;
-    private javax.swing.JButton btnTransferir1;
+    private javax.swing.JButton btnDepositar;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblmovimientos;
     // End of variables declaration//GEN-END:variables

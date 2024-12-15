@@ -79,4 +79,6 @@ public interface ServiciosaAccesoDatos {
      * @throws IOException Si ocurre un error al modificar el archivo.
      */
     void modificarRegistro(String id) throws IOException;
+    
+    void escribirRegistros(ArrayList<String[]> registros) throws IOException;
 }
