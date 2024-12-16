@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Presentacion;
 
 import LogicaNegocio.LogicaTransaccion;
@@ -9,32 +5,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author contr
+ * @author dmsda, Joshua, kendall
  */
 public class ATMApp extends javax.swing.JFrame {
 
     // Variable para almacenar la cuenta autenticada
     private String cuentaAutenticada;
-    private String nombre;
-    private String pin;
+
     /**
      * Creates new form MenuPrincipal
      */
     public ATMApp() throws IOException {
         initComponents();
-    setLocationRelativeTo(null); // Centrar ventana
-    logicaTransaccion = new LogicaTransaccion(); // Inicializar la instancia
+        setLocationRelativeTo(null); // Centrar ventana
+        new LogicaTransaccion(); // Inicializar la instancia
+
     }
 
-    public void setCuentaAutenticada(String cuenta, String nombre, String pin) {
+    public void setCuentaAutenticada(String cuenta, String nombreUsuario, String pin) {
         this.cuentaAutenticada = cuenta;
-        this.nombre = nombre;
-        this.pin = pin;
+
     }
 
     /**
@@ -46,66 +42,19 @@ public class ATMApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MovimientosDialog = new javax.swing.JDialog();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblmovimientos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnDepositar = new javax.swing.JButton();
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        tblmovimientos.setBackground(new java.awt.Color(0, 102, 102));
-        tblmovimientos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Fecha", "Monto", "Movimiento"
-            }
-        ));
-        jScrollPane1.setViewportView(tblmovimientos);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        MovimientosDialog.getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        btnConsultar = new javax.swing.JButton();
+        btnTransferir1 = new javax.swing.JButton();
+        btnRetirar = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
+        btnHisotrial = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblmovimientos = new javax.swing.JTable();
+        Btntipodecambio = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -115,77 +64,388 @@ public class ATMApp extends javax.swing.JFrame {
                 btnDepositarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnDepositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 110, 40));
+        jPanel2.add(btnDepositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 40));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 210));
+        btnConsultar.setText("Consultar Saldo");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 110, 40));
+
+        btnTransferir1.setText("Transferir");
+        btnTransferir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransferir1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnTransferir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 110, 40));
+
+        btnRetirar.setText("Retirar");
+        btnRetirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetirarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnRetirar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 110, 40));
+
+        btnCerrar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnCerrar.setText("Cerrar sesion");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 760, -1));
+
+        btnHisotrial.setText("Movimientos");
+        btnHisotrial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHisotrialActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnHisotrial, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, 40));
+
+        tblmovimientos.setBackground(new java.awt.Color(0, 102, 102));
+        tblmovimientos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Fecha", "Monto", "Movimiento", "Monto transacción", "Monto final "
+            }
+        ));
+        jScrollPane1.setViewportView(tblmovimientos);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 690, 260));
+
+        Btntipodecambio.setText("Consultart tipo de cambio");
+        Btntipodecambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtntipodecambioActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Btntipodecambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, 40));
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
-            // Solicitar el monto al usuario
-    String montoStr = JOptionPane.showInputDialog(this, "Ingrese el monto a depositar:");
+        // Solicitar el monto al usuario
+        String montoStr = JOptionPane.showInputDialog(this, "Ingrese el monto a depositar:");
 
-    // Validar que el usuario no cancele o deje vacío el campo
-    if (montoStr == null || montoStr.trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debe ingresar un monto.", "Error", JOptionPane.WARNING_MESSAGE);
+        // Validar que el usuario no cancele o deje vacío el campo
+        if (montoStr == null || montoStr.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un monto.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // Mostrar el monto ingresado para depuración
+            System.out.println("Monto ingresado (antes de convertir): " + montoStr);
+
+            // Reemplazar comas por puntos si es necesario (para manejar formatos regionales)
+            montoStr = montoStr.replace(",", ".");
+
+            // Validar que el monto sea un número válido
+            if (!montoStr.matches("\\d+(\\.\\d+)?")) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Convertir el monto a double
+            double monto = Double.parseDouble(montoStr);
+
+            // Validar que el monto sea positivo
+            if (monto <= 0) {
+                JOptionPane.showMessageDialog(this, "El monto debe ser un número positivo.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Crear una instancia de LogicaTransaccion
+            LogicaTransaccion logicaTransaccion = new LogicaTransaccion();
+
+            // Obtener el saldo actual de la cuenta
+            double saldoAnterior = logicaTransaccion.consultarSaldo(cuentaAutenticada);
+
+            // Calcular el saldo nuevo
+            double saldoNuevo = saldoAnterior + monto;
+
+            // Registrar el depósito
+            logicaTransaccion.depositar(cuentaAutenticada, monto, saldoAnterior, saldoNuevo);
+
+            // Mostrar mensaje de éxito
+            JOptionPane.showMessageDialog(this,
+                    "Depósito exitoso.\nSaldo anterior: " + saldoAnterior + "\nSaldo nuevo: " + saldoNuevo,
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException ex) {
+            // Manejar error en la conversión del monto a número
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            // Manejar cualquier otra excepción
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btnDepositarActionPerformed
+
+    private void btnHisotrialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHisotrialActionPerformed
+        // Verificar si la cuenta está autenticada
+    if (cuentaAutenticada == null || cuentaAutenticada.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No hay cuenta autenticada.", "Error", JOptionPane.WARNING_MESSAGE);
         return;
     }
 
     try {
-        // Mostrar el monto ingresado para depuración
-        System.out.println("Monto ingresado (antes de convertir): " + montoStr);
-
-        // Reemplazar comas por puntos si es necesario (para manejar formatos regionales)
-        montoStr = montoStr.replace(",", ".");
-
-        // Validar que el monto sea un número válido
-        if (!montoStr.matches("\\d+(\\.\\d+)?")) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Convertir el monto a double
-        double monto = Double.parseDouble(montoStr);
-
-        // Validar que el monto sea positivo
-        if (monto <= 0) {
-            JOptionPane.showMessageDialog(this, "El monto debe ser un número positivo.", "Error", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
         // Crear una instancia de LogicaTransaccion
-        LogicaTransaccion logicaTransaccion = new LogicaTransaccion();
+        LogicaTransaccion logicaHistorial = new LogicaTransaccion();
+        JDialog MovimientosDialog = new JDialog();
+        // Obtener los movimientos del historial usando el número de cuenta autenticada
+        ArrayList<String[]> movimientos = logicaHistorial.leerBalance(cuentaAutenticada);
 
-        // Obtener el saldo actual de la cuenta
-        double saldoAnterior = logicaTransaccion.consultarSaldo(cuentaAutenticada);
+        // Si no se encontraron movimientos
+        if (movimientos.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontraron movimientos para esta cuenta.", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
-        // Calcular el saldo nuevo
-        double saldoNuevo = saldoAnterior + monto;
+        // Crear un modelo de tabla con los movimientos
+        DefaultTableModel model = (DefaultTableModel) tblmovimientos.getModel();
 
-        // Registrar el depósito
-        logicaTransaccion.depositar(cuentaAutenticada, monto, saldoAnterior, saldoNuevo);
+        // Limpiar las filas anteriores en la tabla
+        model.setRowCount(0);
 
-        // Mostrar mensaje de éxito
-        JOptionPane.showMessageDialog(this,
-                "Depósito exitoso.\nSaldo anterior: " + saldoAnterior + "\nSaldo nuevo: " + saldoNuevo,
-                "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        // Definir las columnas de la tabla en el orden solicitado: Fecha, Monto Transacción, Monto Anterior, Movimiento, Monto Final
+        model.setColumnIdentifiers(new String[]{"Fecha", "Monto Transacción", "Monto Anterior", "Movimiento", "Monto Final"});
 
-    } catch (NumberFormatException ex) {
-        // Manejar error en la conversión del monto a número
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
-        ex.printStackTrace();
+        // Agregar las filas a la tabla con los datos de los movimientos
+        for (String[] movimiento : movimientos) {
+            // El formato de cada línea es: "0.0,123.0,Deposito,2024-12-16 12:00:06"
+            // Dividir cada movimiento en sus partes
+            String montoAnterior = movimiento[0];
+            String montoNuevo = movimiento[1];
+            String tipoMovimiento = movimiento[2];
+            String montoTransaccion = movimiento[3];
+            String fecha = movimiento[4];
+
+            // Agregar la fila a la tabla en el orden deseado: Fecha, Monto Transacción, Monto Anterior, Movimiento, Monto Final
+            model.addRow(new Object[]{fecha, montoTransaccion, montoAnterior, tipoMovimiento, montoNuevo});
+        }
+        MovimientosDialog.setVisible(true);
+
+    } catch (IOException ex) {
+        // Mostrar mensaje de error si ocurre alguna excepción
+        JOptionPane.showMessageDialog(this, "Error al cargar el historial: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     } catch (Exception ex) {
-        // Manejar cualquier otra excepción
-        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        ex.printStackTrace();
+        Logger.getLogger(ATMApp.class.getName()).log(Level.SEVERE, null, ex);
     }
-    }//GEN-LAST:event_btnDepositarActionPerformed
+    }//GEN-LAST:event_btnHisotrialActionPerformed
 
-    
-    private final LogicaTransaccion logicaTransaccion;
-    
+    private void btnTransferir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferir1ActionPerformed
+        // Solicitar la cuenta de destino
+        String cuentaDestino = JOptionPane.showInputDialog(this, "Ingrese el número de cuenta de destino:");
+
+        // Validar que el usuario  deje vacío el campo
+        if (cuentaDestino == null || cuentaDestino.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar una cuenta de destino.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Solicitar el monto a transferir
+        String montoStr = JOptionPane.showInputDialog(this, "Ingrese el monto a transferir:");
+
+        // Validar que el usuario  deje vacío el campo
+        if (montoStr == null || montoStr.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un monto.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // Mostrar el monto ingresado para depuración
+            System.out.println("Monto ingresado (antes de convertir): " + montoStr);
+
+            // Reemplazar comas por puntos si es necesario (para manejar formatos regionales)
+            montoStr = montoStr.replace(",", ".");
+
+            // Validar que el monto sea un número válido
+            if (!montoStr.matches("\\d+(\\.\\d+)?")) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Convertir el monto a double
+            double monto = Double.parseDouble(montoStr);
+
+            // Validar que el monto sea positivo
+            if (monto <= 0) {
+                JOptionPane.showMessageDialog(this, "El monto debe ser un número positivo.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Crear una instancia de LogicaTransaccion
+            LogicaTransaccion logicaTransaccion = new LogicaTransaccion();
+
+            // Obtener el saldo actual de la cuenta de origen
+            double saldoOrigen = logicaTransaccion.consultarSaldo(cuentaAutenticada);
+
+            // Verificar si hay suficiente saldo para realizar la transferencia
+            if (saldoOrigen < monto) {
+                JOptionPane.showMessageDialog(this, "Saldo insuficiente en la cuenta de origen.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Obtener el saldo actual de la cuenta de destino
+            double saldoDestino = logicaTransaccion.consultarSaldo(cuentaDestino);
+
+            // Realizar la transferencia (restar del saldo de origen y sumar al saldo de destino)
+            logicaTransaccion.transferir(cuentaAutenticada, cuentaDestino, monto, saldoOrigen, saldoDestino);
+
+            // Mostrar mensaje de éxito
+            JOptionPane.showMessageDialog(this,
+                    "Transferencia exitosa.\nCuenta de origen: " + cuentaAutenticada + "\nCuenta de destino: " + cuentaDestino
+                    + "\nMonto transferido: " + monto,
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException ex) {
+            // Manejar error en la conversión del monto a número
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            // Manejar cualquier otra excepción
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnTransferir1ActionPerformed
+
+    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
+        // Solicitar el monto al usuario
+        String montoStr = JOptionPane.showInputDialog(this, "Ingrese el monto a retirar:");
+
+        // Validar que el usuario no cancele o deje vacío el campo
+        if (montoStr == null || montoStr.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un monto.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // Mostrar el monto ingresado para depuración
+            System.out.println("Monto ingresado (antes de convertir): " + montoStr);
+
+            // Reemplazar comas por puntos si es necesario (para manejar formatos regionales)
+            montoStr = montoStr.replace(",", ".");
+
+            // Validar que el monto sea un número válido
+            if (!montoStr.matches("\\d+(\\.\\d+)?")) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Convertir el monto a double
+            double monto = Double.parseDouble(montoStr);
+
+            // Validar que el monto sea positivo
+            if (monto <= 0) {
+                JOptionPane.showMessageDialog(this, "El monto debe ser un número positivo.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Crear una instancia de LogicaTransaccion
+            LogicaTransaccion logicaTransaccion = new LogicaTransaccion();
+
+            // Obtener el saldo actual de la cuenta
+            double saldoAnterior = logicaTransaccion.consultarSaldo(cuentaAutenticada);
+
+            // Verificar si hay suficiente saldo para realizar el retiro
+            if (saldoAnterior < monto) {
+                JOptionPane.showMessageDialog(this, "Saldo insuficiente para realizar el retiro.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Calcular el saldo nuevo después del retiro
+            double saldoNuevo = saldoAnterior - monto;
+
+            // Registrar el retiro
+            logicaTransaccion.retirar(cuentaAutenticada, monto, saldoAnterior, saldoNuevo);
+
+            // Mostrar mensaje de éxito
+            JOptionPane.showMessageDialog(this,
+                    "Retiro exitoso.\nSaldo anterior: " + saldoAnterior + "\nSaldo nuevo: " + saldoNuevo,
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException ex) {
+            // Manejar error en la conversión del monto a número
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            // Manejar cualquier otra excepción
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnRetirarActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        VentanaLogin login = new VentanaLogin();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        // Verificar si la cuenta está autenticada
+        if (cuentaAutenticada == null || cuentaAutenticada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay cuenta autenticada.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // Crear una instancia de LogicaTransaccion
+            LogicaTransaccion logicaTransaccion = new LogicaTransaccion();
+
+            // Consultar el saldo de la cuenta autenticada
+            double saldo = logicaTransaccion.consultarSaldo(cuentaAutenticada);
+
+            // Mostrar el saldo en un JOptionPane
+            JOptionPane.showMessageDialog(this,
+                    "El saldo de la cuenta  " + cuentaAutenticada + " es: " + saldo,
+                    "Consulta de saldo", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception ex) {
+            // Mostrar mensaje de error si ocurre alguna excepción
+            JOptionPane.showMessageDialog(this, "Error al consultar el saldo: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void BtntipodecambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtntipodecambioActionPerformed
+       Frm_tipo_cambio cambio = new Frm_tipo_cambio();
+       
+            cambio.setVisible(true);
+            this.dispose();  
+    }//GEN-LAST:event_BtntipodecambioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -226,9 +486,13 @@ public class ATMApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog MovimientosDialog;
+    private javax.swing.JToggleButton Btntipodecambio;
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnDepositar;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnHisotrial;
+    private javax.swing.JButton btnRetirar;
+    private javax.swing.JButton btnTransferir1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblmovimientos;

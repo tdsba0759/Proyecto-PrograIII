@@ -1,6 +1,5 @@
 
 package Presentacion;
-// Importaciones necesarias para el funcionamiento del programa
 
 import LogicaNegocio.LogicaCuenta;
 import Seguridad.LogicaEncriptacion;
@@ -8,13 +7,13 @@ import Servicios.ServicioLogicaCuenta;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-// Importa la clase `IOException`, que se utiliza para manejar errores relacionados con la entrada/salida, como problemas al leer o escribir archivos.
+
 import javax.swing.JOptionPane;
-// Importa la clase `JOptionPane`, que se utiliza para mostrar cuadros de diálogo al usuario, como mensajes de error, advertencia o confirmación.
+
 
 /**
  *
- * @author Joshua
+ * @author Joshua, kendall
  */
 public class Credenciales extends javax.swing.JFrame {
 
@@ -106,11 +105,11 @@ public class Credenciales extends javax.swing.JFrame {
 
 
     private void txtNumeroCuentaRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCuentaRegistroActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtNumeroCuentaRegistroActionPerformed
 
     private void txtPinRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPinRegistroActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_txtPinRegistroActionPerformed
     /**
      * Acción realizada al hacer clic en el botón "Generar".
@@ -125,7 +124,7 @@ public class Credenciales extends javax.swing.JFrame {
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
     String numeroCuenta = txtNumeroCuentaRegistro.getText().trim();
     String pin = txtPinRegistro.getText().trim();
-
+    double saldo= 0.0;
     if (numeroCuenta.isEmpty() || pin.isEmpty()) {
         JOptionPane.showMessageDialog(this, "El número de cuenta y el PIN son obligatorios.", "Error", JOptionPane.WARNING_MESSAGE);
         return;
@@ -154,12 +153,9 @@ public class Credenciales extends javax.swing.JFrame {
         LogicaEncriptacion logicaEncriptacion = new LogicaEncriptacion();
         String hashPin = logicaEncriptacion.encriptarPin(pin);
 
-        // Crear el registro temporalmente
-        String registroTemporal = numeroCuenta + "," + nombreUsuario + "," + hashPin;
-
-
+       
         // Registrar la nueva cuenta en el archivo
-        servicio.crearNuevaCuenta(numeroCuenta, nombreUsuario, pin);
+        servicio.crearNuevaCuenta(numeroCuenta, nombreUsuario,saldo, pin);
 
         // Mostrar mensaje de éxito
         JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

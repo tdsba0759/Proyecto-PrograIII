@@ -58,7 +58,7 @@
          * @throws Exception Si ocurre cualquier otro error.
          */
         @Override
-        public void crearNuevaCuenta(String numeroCuenta, String nombreUsuario, String pin) throws IOException, IllegalArgumentException, Exception {
+        public void crearNuevaCuenta(String numeroCuenta, String nombreUsuario,double Saldo, String pin) throws IOException, IllegalArgumentException, Exception {
             if (existeCuenta(numeroCuenta)) {
                 throw new IllegalArgumentException("El número de cuenta ya existe.");
             }
@@ -67,7 +67,7 @@
             String pinEncriptado = encriptacion.encriptarPin(pin);
 
             // Crear el registro
-            String nuevaCuenta = numeroCuenta + "," + nombreUsuario + "," + pinEncriptado;
+            String nuevaCuenta = numeroCuenta + "," + nombreUsuario + "," +Saldo + "," + pinEncriptado;
 
             // Guardar el registro en el archivo
             accesoDatos.agregarRegistro(nuevaCuenta);
@@ -86,7 +86,7 @@
          * @throws Exception Si ocurre un error durante la verificación.
          */
     @Override
-    public boolean validarCredenciales(String cedula, String pin) throws IOException, Exception {
+    public boolean validarCredenciales(String numeroCuenta, String pin) throws IOException, Exception {
         AccesoDatos accesoDatos = new AccesoDatos();
 
         // Encriptar el PIN ingresado por el usuario utilizando LogicaEncriptacion
@@ -96,7 +96,7 @@
         // Leer usuarios y verificar credenciales
         ArrayList<String[]> usuarios = accesoDatos.leerRegistros();
         for (String[] usuario : usuarios) {
-            if (usuario[0].equals(cedula) && usuario[2].equals(hashPin)) {
+            if (usuario[0].equals(numeroCuenta) && usuario[3].equals(hashPin)) {
                 return true; // Autenticación exitosa
             }
         }

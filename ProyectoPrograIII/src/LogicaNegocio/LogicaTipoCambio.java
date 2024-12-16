@@ -7,6 +7,7 @@
  */
 package LogicaNegocio;
 
+import AccesoDatos.Acceso_Datos_Tipo_Cambio;
 import Servicios.ServicioAccesoDatosTipoCambio;
 
 public class LogicaTipoCambio implements Servicios.ServicioLogicaTipoCambio {
@@ -14,15 +15,14 @@ public class LogicaTipoCambio implements Servicios.ServicioLogicaTipoCambio {
     /**
      * Servicio para acceder a los datos del tipo de cambio.
      */
-    private final ServicioAccesoDatosTipoCambio servicioTipoCambio;
+    private final ServicioAccesoDatosTipoCambio servicioAcceso;
 
     /**
      * Constructor que inicializa la clase con un servicio de acceso a datos de tipo de cambio.
      *
-     * @param servicioTipoCambio Instancia del servicio de acceso a datos para manejar el tipo de cambio.
      */
-    public LogicaTipoCambio(ServicioAccesoDatosTipoCambio servicioTipoCambio) {
-        this.servicioTipoCambio = servicioTipoCambio;
+     public LogicaTipoCambio() {
+        this.servicioAcceso = new Acceso_Datos_Tipo_Cambio();
     }
 
     /**
@@ -39,14 +39,6 @@ public class LogicaTipoCambio implements Servicios.ServicioLogicaTipoCambio {
      */
     @Override
     public String obtenerTipoCambio(String indicador, String fechaInicio, String fechaFinal, String nombre, String subniveles, String email, String token) throws Exception {
-        // Llama al servicio para obtener el tipo de cambio
-        String tipoCambio = servicioTipoCambio.obtenerTipoCambio(indicador, fechaInicio, fechaFinal, nombre, subniveles, email, token);
-
-        // Verifica que el tipo de cambio no sea nulo o vacío
-        if (tipoCambio == null || tipoCambio.isEmpty()) {
-            return null; // Retorna null para indicar un valor inválido
-        } else {
-            return tipoCambio; // Retorna el tipo de cambio si no es nulo ni vacío
-        }
+        return servicioAcceso.obtenerTipoCambio(indicador, fechaInicio, fechaFinal, nombre, subniveles, email, token);
     }
 }
