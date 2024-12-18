@@ -23,7 +23,7 @@ import java.util.Date;
  */
 public class LogicaTransaccion implements ServicioLogicaTransaccion {
 
-    private final AccesoDatos accesoDatos;
+    public  final AccesoDatos accesoDatos;
 
     public LogicaTransaccion() throws IOException {
         this.accesoDatos = new AccesoDatos(); // Inicializa el acceso a datos

@@ -80,9 +80,7 @@ public class LogicaCuenta implements Servicios.ServicioLogicaCuenta {
      */
     @Override
     public boolean validarCredenciales(String numeroCuenta, String pin) throws IOException, Exception {
-        AccesoDatos accesoDatos = new AccesoDatos();
-
-        // Encriptar el PIN ingresado por el usuario utilizando LogicaEncriptacion
+                // Encriptar el PIN ingresado por el usuario utilizando LogicaEncriptacion
         LogicaEncriptacion logicaEncriptacion = new LogicaEncriptacion();
         String hashPin = logicaEncriptacion.encriptarPin(pin);
 

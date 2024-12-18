@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 public class VentanaLogin extends javax.swing.JFrame {
 
     private String cuentaAutenticada;  // Variable para almacenar el número de cuenta autenticado
-private String nombre;
-    private String pin;
+    private String nombre;
+    
     /**
      * Creates new form VentanaLogin1
      */

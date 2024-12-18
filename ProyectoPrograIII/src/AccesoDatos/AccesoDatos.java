@@ -111,7 +111,7 @@ public class AccesoDatos implements Servicios.ServiciosaAccesoDatos {
               return; // No escribir líneas vacías
           }
 
-          BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt", true)); // `true` para agregar al final
+          BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo, false)); // `true` para agregar al final
           writer.write(linea);
           writer.newLine();
           writer.close();
@@ -130,7 +130,7 @@ public class AccesoDatos implements Servicios.ServiciosaAccesoDatos {
         @Override
         public ArrayList<String[]> leerRegistros() throws IOException {
             ArrayList<String[]> registros = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo));
             String linea;
 
             while ((linea = reader.readLine()) != null) {
