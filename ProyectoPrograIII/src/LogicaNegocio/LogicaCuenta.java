@@ -55,18 +55,25 @@ public class LogicaCuenta implements Servicios.ServicioLogicaCuenta {
      */
     @Override
     public void crearNuevaCuenta(String numeroCuenta, String nombreUsuario, double Saldo, String pin) throws IOException, IllegalArgumentException, Exception {
-        if (existeCuenta(numeroCuenta)) {
-            throw new IllegalArgumentException("El número de cuenta ya existe.");
-        }
+    if (existeCuenta(numeroCuenta)) {
+        throw new IllegalArgumentException("El número de cuenta ya existe.");
+    }
 
-        LogicaEncriptacion encriptacion = new LogicaEncriptacion();
-        String pinEncriptado = encriptacion.encriptarPin(pin);
+    LogicaEncriptacion encriptacion = new LogicaEncriptacion();
+    String pinEncriptado = encriptacion.encriptarPin(pin);
 
-        // Crear el registro
-        String nuevaCuenta = numeroCuenta + "," + nombreUsuario + "," + Saldo + "," + pinEncriptado;
+    // Crear el registro
+    String nuevaCuenta = numeroCuenta + "," + nombreUsuario + "," + Saldo + "," + pinEncriptado;
 
-        // Guardar el registro en el archivo
-        accesoDatos.agregarRegistro(nuevaCuenta);
+    // Guardar el registro en el archivo en modo anexado
+    try (FileWriter writer = new FileWriter("usuarios.txt", true); 
+         BufferedWriter bufferedWriter = new BufferedWriter(writer);
+         PrintWriter printWriter = new PrintWriter(bufferedWriter)) {
+
+        printWriter.println(nuevaCuenta);
+    } catch (IOException e) {
+        throw new IOException("Error al escribir en el archivo usuarios.txt: " + e.getMessage());
+    }
     }
 
     /**
