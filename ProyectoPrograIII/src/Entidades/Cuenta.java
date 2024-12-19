@@ -3,8 +3,9 @@ package Entidades;
 /**
  * Clase que representa una cuenta bancaria. Contiene un número de cuenta,
  * saldo, nombre del usuario, PIN encriptado y un método para validar retiros.
+ * Esta clase se puede usar para gestionar las operaciones básicas relacionadas
+ * con una cuenta bancaria.
  * 
- * @author Joshua
  */
 public class Cuenta {
 
@@ -30,6 +31,7 @@ public class Cuenta {
 
     /**
      * Constructor por defecto para la clase {@code Cuenta}.
+     * Este constructor crea una cuenta con valores predeterminados.
      */
     public Cuenta() {}
 
@@ -123,9 +125,11 @@ public class Cuenta {
 
     /**
      * Método para validar si un retiro es posible con base en el monto especificado.
+     * Se verifica que el monto solicitado no exceda el saldo disponible en la cuenta.
      * 
      * @param monto Monto a retirar.
-     * @return {@code true} si el retiro es válido; {@code false} en caso contrario.
+     * @return {@code true} si el retiro es válido (es decir, si el saldo es suficiente); 
+     *         {@code false} en caso contrario.
      */
     public boolean validarRetiro(double monto) {
         // Lógica para validar el retiro, por ejemplo, verificando el saldo disponible

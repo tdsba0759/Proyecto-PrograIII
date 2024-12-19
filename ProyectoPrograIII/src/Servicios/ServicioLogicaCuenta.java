@@ -6,7 +6,6 @@ import java.io.IOException;
  * Interfaz que define los servicios relacionados con la lógica de las cuentas bancarias.
  * Incluye métodos para verificar la existencia de una cuenta y crear una nueva cuenta.
  * 
- * @author dmsda
  */
 public interface ServicioLogicaCuenta {
 
@@ -23,7 +22,9 @@ public interface ServicioLogicaCuenta {
      * Crea una nueva cuenta con el número de cuenta y saldo proporcionados.
      * 
      * @param numeroCuenta El número de la nueva cuenta.
-     * @param saldo El saldo inicial de la nueva cuenta.
+     * @param nombreUsuario
+     * @param Saldo
+     * @param pin
      * @throws IOException Si ocurre un error al crear la cuenta o acceder a los datos.
      */
     void crearNuevaCuenta(String numeroCuenta,String nombreUsuario,double Saldo, String pin) throws IOException, IllegalArgumentException, Exception;
@@ -31,9 +32,10 @@ public interface ServicioLogicaCuenta {
     /**
      * Valida las credenciales de un usuario comparando el nombre de usuario y la contraseña proporcionada.
      * 
-     * @param usuario El nombre de usuario.
-     * @param contrasena La contraseña proporcionada para validar.
+     * @param numeroCuenta
+     * @param pin
      * @return true si las credenciales son válidas, false en caso contrario.
+     * @throws java.io.IOException
      */
      boolean validarCredenciales(String numeroCuenta, String pin) throws IOException, Exception;
 }

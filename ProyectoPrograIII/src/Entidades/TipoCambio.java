@@ -3,9 +3,8 @@ package Entidades;
 /**
  * Clase que representa el tipo de cambio, incluyendo los valores de compra y venta.
  * Esta clase permite obtener y establecer los valores asociados al tipo de cambio,
- * así como proporcionar una representación en forma de cadena.
+ * así como proporcionar una representación en forma de cadena para facilitar su visualización.
  * 
- * @author dmsda
  */
 public class TipoCambio {
 
@@ -70,7 +69,8 @@ public class TipoCambio {
      * Devuelve una representación en forma de cadena del tipo de cambio, mostrando
      * los valores de compra y venta.
      * 
-     * @return Una cadena con los valores de compra y venta del tipo de cambio.
+     * @return Una cadena con los valores de compra y venta del tipo de cambio,
+     *         en el formato: "Tipo de cambio - Compra: [valor], Venta: [valor]".
      */
     @Override
     public String toString() {

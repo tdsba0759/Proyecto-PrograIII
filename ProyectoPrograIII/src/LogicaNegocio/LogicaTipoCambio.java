@@ -3,7 +3,6 @@
  * con el tipo de cambio. Se comunica con la capa de servicios para obtener
  * la información del tipo de cambio y realizar validaciones adicionales.
  * 
- * @author dmsda
  */
 package LogicaNegocio;
 
@@ -34,6 +33,7 @@ public class LogicaTipoCambio implements Servicios.ServicioLogicaTipoCambio {
      * @param nombre Nombre del solicitante.
      * @param subniveles Indica si se incluyen subniveles (S/N).
      * @param email Correo electrónico del solicitante.
+     * @param token el token para realizar las consultas
      * @return El tipo de cambio como String, o null si no es válido.
      * @throws Exception Si ocurre un error al obtener el tipo de cambio desde el servicio.
      */

@@ -8,7 +8,6 @@ import java.util.ArrayList;
  * Interfaz que define los métodos necesarios para acceder y gestionar datos desde un archivo,
  * incluyendo operaciones como agregar, leer, modificar registros y gestionar la eliminación de datos.
  * 
- * @author dmsda
  * 
  */
 public interface ServiciosaAccesoDatos {

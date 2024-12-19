@@ -5,7 +5,6 @@ package Servicios;
  * Esta interfaz incluye la obtención del tipo de cambio, la construcción de una solicitud SOAP
  * y el análisis de la respuesta XML.
  * 
- * @author dmsda
  */
 public interface ServicioAccesoDatosTipoCambio {
     

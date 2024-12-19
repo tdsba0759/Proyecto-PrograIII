@@ -13,80 +13,101 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * La clase LogicaTransaccion gestiona las transacciones bancarias, como la
+ * La clase {@code LogicaTransaccion} gestiona las transacciones bancarias, como la
  * consulta de saldo, la adición y eliminación de saldo en cuentas y el registro
- * de las transacciones. Utiliza la clase AccesoDatos para la lectura y
- * escritura de registros y la clase Idcontrol para la gestión de los
+ * de las transacciones. Utiliza la clase {@code AccesoDatos} para la lectura y
+ * escritura de registros y la clase {@code Idcontrol} para la gestión de los
  * identificadores únicos de transacciones.
- *
- * @autor dmsda
+ * 
+ * <p>Esta clase implementa los métodos necesarios para realizar depósitos, retiros, 
+ * consultas de saldo y transferencias entre cuentas. También permite registrar el 
+ * historial de las transacciones en archivos específicos de cada cuenta.</p>
+ * 
  */
 public class LogicaTransaccion implements ServicioLogicaTransaccion {
 
-    public  final AccesoDatos accesoDatos;
+    /**
+     * Objeto para manejar el acceso a los datos de los usuarios.
+     */
+    public final AccesoDatos accesoDatos;
 
+    /**
+     * Constructor de la clase {@code LogicaTransaccion}. Inicializa el acceso a los
+     * datos y configura el nombre del archivo donde se almacenan los usuarios.
+     *
+     * @throws IOException si ocurre un error al inicializar el acceso a datos.
+     */
     public LogicaTransaccion() throws IOException {
-        this.accesoDatos = new AccesoDatos(); // Inicializa el acceso a datos
+        this.accesoDatos = new AccesoDatos();
         this.accesoDatos.nombreArchivo = "usuarios.txt";
     }
 
+    /**
+     * Consulta el saldo de una cuenta específica.
+     *
+     * @param cuentaId ID de la cuenta cuyo saldo se desea consultar.
+     * @return el saldo actual de la cuenta.
+     * @throws Exception si la cuenta no se encuentra.
+     */
     @Override
     public double consultarSaldo(String cuentaId) throws Exception {
-        // Leer los registros del archivo
         ArrayList<String[]> registros = accesoDatos.leerRegistros();
-
-        // Buscar la cuenta por su ID
         for (String[] registro : registros) {
             if (registro[0].equals(cuentaId)) {
-                // Si la cuenta existe, devolver el saldo como un valor double
                 return Double.parseDouble(registro[2]);
             }
         }
-
-        // Si la cuenta no se encuentra, lanzar una excepción
         throw new Exception("Cuenta no encontrada.");
     }
 
+    /**
+     * Realiza un depósito en una cuenta específica.
+     *
+     * @param cuentaId ID de la cuenta donde se realizará el depósito.
+     * @param monto Monto a depositar.
+     * @param saldoAnterior Saldo previo antes del depósito.
+     * @param saldoNuevo Saldo actualizado después del depósito.
+     * @throws Exception si la cuenta no se encuentra.
+     */
     @Override
     public void depositar(String cuentaId, double monto, double saldoAnterior, double saldoNuevo) throws Exception {
-        // Leer los registros del archivo
         ArrayList<String[]> registros = accesoDatos.leerRegistros();
         boolean cuentaEncontrada = false;
-
-        // Buscar la cuenta y actualizar el saldo
         for (String[] registro : registros) {
-            if (registro[0].equals(cuentaId)) { // Comparar ID de cuenta
-                saldoAnterior = Double.parseDouble(registro[2]); // Obtener el saldo actual
-                saldoNuevo = saldoAnterior + monto; // Sumar el monto al saldo
-                registro[2] = String.valueOf(saldoNuevo); // Actualizar el saldo en el registro
+            if (registro[0].equals(cuentaId)) {
+                saldoAnterior = Double.parseDouble(registro[2]);
+                saldoNuevo = saldoAnterior + monto;
+                registro[2] = String.valueOf(saldoNuevo);
                 cuentaEncontrada = true;
                 break;
             }
         }
-
         if (!cuentaEncontrada) {
             throw new Exception("Cuenta no encontrada.");
         }
-
-        // Sobrescribir el archivo con los registros actualizados
         accesoDatos.escribirRegistros(registros);
-
-        // Registrar el saldo anterior y el nuevo en el archivo de balance del usuario
         registrarBalance(cuentaId, saldoAnterior, saldoNuevo, "Deposito", monto);
     }
 
+    /**
+     * Realiza un retiro en una cuenta específica.
+     *
+     * @param cuentaId ID de la cuenta de donde se realizará el retiro.
+     * @param monto Monto a retirar.
+     * @param saldoAnterior Saldo previo antes del retiro.
+     * @param saldoNuevo Saldo actualizado después del retiro.
+     * @throws Exception si la cuenta no se encuentra o el saldo es
+     * insuficiente.
+     */
     @Override
     public void retirar(String cuentaId, double monto, double saldoAnterior, double saldoNuevo) throws Exception {
-        // Leer los registros del archivo
         ArrayList<String[]> registros = accesoDatos.leerRegistros();
         boolean cuentaEncontrada = false;
-
-        // Buscar la cuenta y actualizar el saldo
         for (String[] registro : registros) {
-            if (registro[0].equals(cuentaId)) { // Comparar ID de cuenta
-                saldoAnterior = Double.parseDouble(registro[2]); // Obtener el saldo actual
-                saldoNuevo = saldoAnterior - monto; // Sumar el monto al saldo
-                registro[2] = String.valueOf(saldoNuevo); // Actualizar el saldo en el registro
+            if (registro[0].equals(cuentaId)) {
+                saldoAnterior = Double.parseDouble(registro[2]);
+                saldoNuevo = saldoAnterior - monto;
+                registro[2] = String.valueOf(saldoNuevo);
                 cuentaEncontrada = true;
                 break;
             }
@@ -94,76 +115,73 @@ public class LogicaTransaccion implements ServicioLogicaTransaccion {
         if (!cuentaEncontrada) {
             throw new Exception("Cuenta no encontrada.");
         }
-
-        // Sobrescribir el archivo con los registros actualizados
         accesoDatos.escribirRegistros(registros);
         registrarBalance(cuentaId, saldoAnterior, saldoNuevo, "Retiro", monto);
     }
 
+    /**
+     * Realiza una transferencia entre dos cuentas.
+     *
+     * @param cuentaOrigenId ID de la cuenta desde donde se realizará la transferencia.
+     * @param cuentaDestinoId ID de la cuenta que recibirá la transferencia.
+     * @param monto Monto a transferir.
+     * @param saldoOrigen Saldo actualizado de la cuenta de origen.
+     * @param saldoDestino Saldo actualizado de la cuenta de destino.
+     * @throws Exception si alguna de las cuentas no se encuentra o el saldo es
+     * insuficiente.
+     */
     @Override
     public void transferir(String cuentaOrigenId, String cuentaDestinoId, double monto, double saldoOrigen, double saldoDestino) throws Exception {
-        // Leer los registros del archivo
         ArrayList<String[]> registros = accesoDatos.leerRegistros();
         boolean origenEncontrado = false;
         boolean destinoEncontrado = false;
-
-        // Buscar las cuentas origen y destino y actualizar sus saldos
         for (String[] registro : registros) {
-            if (registro[0].equals(cuentaOrigenId)) { // Cuenta de origen encontrada
+            if (registro[0].equals(cuentaOrigenId)) {
                 saldoOrigen = Double.parseDouble(registro[2]);
                 if (saldoOrigen < monto) {
                     throw new Exception("Saldo insuficiente en la cuenta de origen.");
                 }
-                saldoOrigen -= monto; // Restar el monto al saldo de origen
-                registro[2] = String.valueOf(saldoOrigen); // Actualizar el saldo
+                saldoOrigen -= monto;
+                registro[2] = String.valueOf(saldoOrigen);
                 origenEncontrado = true;
-            } else if (registro[0].equals(cuentaDestinoId)) { // Cuenta de destino encontrada
+            } else if (registro[0].equals(cuentaDestinoId)) {
                 saldoDestino = Double.parseDouble(registro[2]);
-                saldoDestino += monto; // Sumar el monto al saldo de destino
-                registro[2] = String.valueOf(saldoDestino); // Actualizar el saldo
+                saldoDestino += monto;
+                registro[2] = String.valueOf(saldoDestino);
                 destinoEncontrado = true;
             }
-
-            // Si ambas cuentas ya fueron encontradas, no es necesario seguir buscando
             if (origenEncontrado && destinoEncontrado) {
                 break;
             }
         }
-
-        // Validar que ambas cuentas se encontraron
         if (!origenEncontrado) {
             throw new Exception("Cuenta de origen no encontrada.");
         }
-
         if (!destinoEncontrado) {
             throw new Exception("Cuenta de destino no encontrada.");
         }
-
-        // Sobrescribir el archivo con los registros actualizados
         accesoDatos.escribirRegistros(registros);
-
-        // Registrar balances
-        registrarBalance(cuentaOrigenId, saldoOrigen + monto, saldoOrigen, "Transferencia envio", monto); // Saldo de origen
-        registrarBalance(cuentaDestinoId, saldoDestino - monto, saldoDestino, "Transferencia recibe", monto); // Saldo de destino
-
+        registrarBalance(cuentaOrigenId, saldoOrigen + monto, saldoOrigen, "Transferencia envio", monto);
+        registrarBalance(cuentaDestinoId, saldoDestino - monto, saldoDestino, "Transferencia recibe", monto);
     }
 
+    /**
+     * Registra un balance en el archivo asociado a una cuenta.
+     *
+     * @param cuentaId ID de la cuenta a la que se asocia el balance.
+     * @param saldoAnterior Saldo antes de la operación.
+     * @param saldoNuevo Saldo después de la operación.
+     * @param movimiento Tipo de movimiento realizado (ej. Deposito, Retiro, etc.).
+     * @param monto Monto de la operación.
+     * @throws Exception si ocurre un error al escribir en el archivo.
+     */
     @Override
     public void registrarBalance(String cuentaId, double saldoAnterior, double saldoNuevo, String movimiento, double monto) throws Exception {
-        // Nombre del archivo de balance con el formato especificado
         String archivoBalance = cuentaId + "-Balance.txt";
-
-        // Obtener la fecha actual con el formato deseado
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fecha = sdf.format(new Date());
-
-        // Formato del balance en una sola línea, agregando la fecha al inicio
-        String lineaBalance = saldoAnterior + "," + saldoNuevo + "," + movimiento + ","+ monto + "," + fecha ;
-
-        // Crear el archivo de balance (en la ubicación por defecto del proyecto)
+        String lineaBalance = saldoAnterior + "," + saldoNuevo + "," + movimiento + "," + monto + "," + fecha;
         File archivo = new File(archivoBalance);
-
-        // Escribir la línea de balance en el archivo
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo, true))) {
             writer.write(lineaBalance);
             writer.newLine();
@@ -174,6 +192,14 @@ public class LogicaTransaccion implements ServicioLogicaTransaccion {
         }
     }
 
+    /**
+     * Lee los balances registrados en el archivo asociado a una cuenta.
+     *
+     * @param cuentaId ID de la cuenta cuyo balance se desea leer.
+     * @return una lista de arreglos con los registros del balance.
+     * @throws IOException si ocurre un error al leer el archivo o el archivo no
+     * existe.
+     */
     @Override
     public ArrayList<String[]> leerBalance(String cuentaId) throws IOException {
         // Nombre del archivo de balance con el formato especificado
@@ -194,16 +220,11 @@ public class LogicaTransaccion implements ServicioLogicaTransaccion {
             while ((linea = reader.readLine()) != null) {
                 linea = linea.trim();
                 if (!linea.isEmpty()) { // Evitar procesar líneas vacías
-                    registros.add(linea.split(",")); // Dividir la línea en columnas (usando coma como delimitador)
+                    registros.add(linea.split(","));
                 }
             }
-        } catch (IOException e) {
-            System.err.println("Error al leer el archivo de balance: " + e.getMessage());
-            throw e;
         }
 
-        // Devolver los registros como lista de arreglos
         return registros;
     }
-
 }

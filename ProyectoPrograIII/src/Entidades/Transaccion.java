@@ -7,8 +7,9 @@ import java.util.Date;
  * sobre el tipo de transacción, monto, fecha y la cuenta asociada.
  * 
  * Esta clase permite modelar operaciones financieras realizadas en una cuenta.
+ * Se pueden realizar transacciones como depósitos, retiros y otras operaciones
+ * bancarias que afecten el saldo de la cuenta.
  * 
- * @author Joshua
  */
 public class Transaccion {
 
@@ -33,13 +34,14 @@ public class Transaccion {
     private String cuentaId;
 
     /**
-     * Constructor por defecto.
+     * Constructor por defecto para la clase {@code Transaccion}.
      */
     public Transaccion() {
     }
 
     /**
      * Constructor que inicializa los valores de tipo de transacción, monto y fecha.
+     * Este constructor es útil para crear una transacción con los detalles específicos.
      * 
      * @param tipoTransaccion Tipo de la transacción (e.g., depósito, retiro).
      * @param monto Monto de la transacción.
@@ -90,7 +92,7 @@ public class Transaccion {
     /**
      * Obtiene la fecha de la transacción.
      * 
-     * @return La fecha de la transacción.
+     * @return La fecha en que se realizó la transacción.
      */
     public Date getFecha() {
         return fecha;
@@ -108,7 +110,7 @@ public class Transaccion {
     /**
      * Obtiene el identificador de la cuenta asociada a la transacción.
      * 
-     * @return El ID de la cuenta asociada.
+     * @return El ID de la cuenta asociada a la transacción.
      */
     public String getCuentaId() {
         return cuentaId;

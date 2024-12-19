@@ -5,7 +5,6 @@ package Servicios;
  * Esta interfaz incluye la encriptación del PIN utilizando un algoritmo seguro y
  * la verificación de un PIN encriptado.
  * 
- * @author dmsda
  * 
  */
 public interface ServicioEncriptacionPIN {

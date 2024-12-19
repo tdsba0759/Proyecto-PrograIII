@@ -5,8 +5,6 @@ package Servicios;
  * Esta interfaz permite acceder a los datos del tipo de cambio utilizando los parámetros relevantes como indicador,
  * fechas y otros detalles asociados.
  * 
- * @author dmsda
- * 
  */
 public interface ServicioLogicaTipoCambio {
     

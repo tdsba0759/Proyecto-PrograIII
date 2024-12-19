@@ -1,6 +1,5 @@
 package Servicios;
 
-import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,7 +9,6 @@ import java.util.ArrayList;
  * quitar saldo y registrar una transacción. Esta interfaz permite manejar las
  * transacciones de manera segura y eficiente.
  *
- * @author dmsda
  *
  */
 public interface ServicioLogicaTransaccion {
@@ -31,6 +29,8 @@ public interface ServicioLogicaTransaccion {
      * @param cuentaId El identificador de la cuenta a la que se agregará el
      * saldo.
      * @param monto El monto a agregar.
+     * @param saldoAnterior
+     * @param saldoNuevo
      * @throws Exception Si ocurre un error al agregar el saldo.
      */
     void depositar(String cuentaId, double monto, double saldoAnterior, double saldoNuevo) throws Exception;
@@ -42,8 +42,8 @@ public interface ServicioLogicaTransaccion {
      * @param cuentaId El identificador de la cuenta en la que se realiza la
      * transacción.
      * @param monto El monto de la transacción.
-     * @param tipoTransaccion El tipo de transacción (por ejemplo, "Ingreso" o
-     * "Retiro").
+     * @param saldoAnterior
+     * @param saldoNuevo
      * @throws Exception Si ocurre un error al registrar la transacción.
      */
     void retirar(String cuentaId, double monto, double saldoAnterior, double saldoNuevo) throws Exception;
