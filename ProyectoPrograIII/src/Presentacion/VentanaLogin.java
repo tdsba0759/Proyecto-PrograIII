@@ -41,21 +41,33 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnIngreso1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtCuenta.setBackground(new java.awt.Color(0, 102, 102));
+        txtCuenta.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtCuenta.setForeground(new java.awt.Color(255, 255, 255));
+
+        txtPin.setBackground(new java.awt.Color(0, 102, 102));
+        txtPin.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtPin.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Pin");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Numero de Cuenta");
 
         btnIngreso.setBackground(new java.awt.Color(0, 102, 102));
+        btnIngreso.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnIngreso.setForeground(new java.awt.Color(255, 255, 255));
         btnIngreso.setText("Ingresar");
         btnIngreso.addActionListener(new java.awt.event.ActionListener() {
@@ -68,9 +80,12 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("LOGIN");
 
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("No tienes una cuenta? ");
 
-        btnIngreso1.setForeground(new java.awt.Color(204, 0, 0));
+        btnIngreso1.setBackground(new java.awt.Color(0, 102, 102));
+        btnIngreso1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnIngreso1.setForeground(new java.awt.Color(255, 255, 255));
         btnIngreso1.setText("Registrarme");
         btnIngreso1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,34 +144,33 @@ public class VentanaLogin extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(btnIngreso1))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 300, 340));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 300, 400));
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
 
-        jLabel4.setBackground(new java.awt.Color(0, 102, 102));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/imagenlogin.jpg"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/Banco login.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel4)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(jLabel6)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel4)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
+                .addComponent(jLabel6)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 340));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 400));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -257,8 +271,8 @@ public class VentanaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

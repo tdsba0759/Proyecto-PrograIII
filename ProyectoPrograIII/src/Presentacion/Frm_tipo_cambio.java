@@ -51,56 +51,80 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
         txtMonto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbresultado = new javax.swing.JLabel();
+        btnconsultarconveersión = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 3, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Consultar el tipo de cambio por fechas");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 12, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Fecha de inicio");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
+
+        dtinicio.setBackground(new java.awt.Color(255, 255, 255));
+        dtinicio.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(dtinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 141, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Fecha final");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, -1, -1));
+        jPanel1.add(dtfinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, 136, -1));
 
+        btnconsultarconversion.setBackground(new java.awt.Color(255, 255, 255));
         btnconsultarconversion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnconsultarconversion.setForeground(new java.awt.Color(0, 0, 0));
         btnconsultarconversion.setText("Consultar");
         btnconsultarconversion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnconsultarconversionActionPerformed(evt);
             }
         });
+        jPanel1.add(btnconsultarconversion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
 
+        btnlimpiar.setBackground(new java.awt.Color(255, 255, 255));
         btnlimpiar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnlimpiar.setForeground(new java.awt.Color(0, 0, 0));
         btnlimpiar.setText("Limpiar");
         btnlimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnlimpiarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
 
-        btnregresar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnregresar.setBackground(new java.awt.Color(255, 255, 255));
+        btnregresar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnregresar.setForeground(new java.awt.Color(0, 0, 0));
         btnregresar.setText("Regresar");
         btnregresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnregresarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 160, 30));
 
+        btndolares.setBackground(new java.awt.Color(0, 102, 102));
         buttonGroup1.add(btndolares);
         btndolares.setForeground(new java.awt.Color(255, 255, 255));
         btndolares.setText("Dolares");
+        jPanel1.add(btndolares, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 143, 88, -1));
 
+        btncolones.setBackground(new java.awt.Color(0, 102, 102));
         buttonGroup1.add(btncolones);
         btncolones.setForeground(new java.awt.Color(255, 255, 255));
         btncolones.setText("Colones");
+        jPanel1.add(btncolones, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 184, -1, -1));
 
         tblresultados.setBackground(new java.awt.Color(204, 204, 204));
         tblresultados.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -114,117 +138,43 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblresultados);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 860, 164));
+
+        txtMonto.setBackground(new java.awt.Color(255, 255, 255));
+        txtMonto.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        txtMonto.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 143, 104, 84));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Digite el monto que desea consultar:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 100, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Seleccione el tipo de divisa que utilizara para la consulta:");
+        jLabel2.setText("seleccione el tipo de divisa que utilizara para la consulta");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 64, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/divisas.png"))); // NOI18N
+        lbresultado.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbresultado.setForeground(new java.awt.Color(255, 255, 255));
+        lbresultado.setText("Monto");
+        jPanel1.add(lbresultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dtinicio, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btncolones)
-                                .addComponent(btndolares, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
-                                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(52, 52, 52))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(257, 257, 257)
-                                .addComponent(jLabel6))
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                        .addComponent(dtfinal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(150, 150, 150))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnconsultarconversion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnlimpiar)
-                        .addGap(142, 142, 142))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnregresar)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(btndolares)
-                        .addGap(18, 18, 18)
-                        .addComponent(btncolones)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)
-                        .addGap(35, 35, 35)
-                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(dtinicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(64, 64, 64)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnconsultarconversion)
-                            .addComponent(btnlimpiar)))
-                    .addComponent(dtfinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(btnregresar)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
+        btnconsultarconveersión.setBackground(new java.awt.Color(255, 255, 255));
+        btnconsultarconveersión.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnconsultarconveersión.setForeground(new java.awt.Color(0, 0, 0));
+        btnconsultarconveersión.setText("Consultar");
+        btnconsultarconveersión.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconsultarconveersiónActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnconsultarconveersión, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
-        );
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/Divisa .jpg"))); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -303,6 +253,61 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_btnregresarActionPerformed
 
+    private void btnconsultarconveersiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarconveersiónActionPerformed
+
+      // Definir la fecha directamente como una cadena
+String fecha = "12/12/2024";
+
+// Verifica cuál JRadioButton está seleccionado para determinar el tipo de moneda
+String tipoMoneda;
+if (btndolares.isSelected()) {
+    tipoMoneda = "Dólares";
+} else if (btncolones.isSelected()) {
+    tipoMoneda = "Colones";
+} else {
+    JOptionPane.showMessageDialog(this, "Por favor seleccione un tipo de moneda.");
+    return; // Sale del método si no se ha seleccionado un tipo de moneda
+}
+
+double monto;
+try {
+    // Obtiene el monto desde el campo de texto y lo convierte a tipo double
+    monto = Double.parseDouble(txtMonto.getText());
+} catch (NumberFormatException e) {
+    // Si el monto no es un número válido, muestra un mensaje de error
+    JOptionPane.showMessageDialog(this, "Por favor ingrese un monto válido.");
+    return; // Termina la ejecución si el monto es inválido
+}
+
+// Inicializa la lógica de negocio
+LogicaTipoCambio logicaNegocio = new LogicaTipoCambio();
+
+try {
+    // Llama a la lógica de negocio para obtener el tipo de cambio
+    String tipoCambio = logicaNegocio.obtenerTipoCambio("317", fecha, fecha, "David", "N", "dmsdavidmonterososa@gmail.com", token);
+
+    // Convierte el tipo de cambio a un valor numérico (double)
+    double tipoCambioValor = Double.parseDouble(tipoCambio);
+
+    // Realiza la conversión según el tipo de moneda seleccionado
+    double resultadoConversion = 0;
+    if (tipoMoneda.equals("Dólares")) {
+        // Si el tipo de moneda es Dólares, multiplicamos el monto por el tipo de cambio
+        resultadoConversion = monto * tipoCambioValor;
+    } else if (tipoMoneda.equals("Colones")) {
+        // Si el tipo de moneda es Colones, dividimos el monto por el tipo de cambio
+        resultadoConversion = monto / tipoCambioValor;
+    }
+
+    // Muestra el resultado en el JLabel
+    lbresultado.setText("La conversión de " + monto + " es: " + resultadoConversion + " en " + tipoMoneda);
+
+} catch (Exception ex) {
+    // Si ocurre algún error en la obtención del tipo de cambio o en la conversión, se muestra el mensaje de error
+    lbresultado.setText("Error: " + ex.getMessage());
+}
+    }//GEN-LAST:event_btnconsultarconveersiónActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -340,6 +345,7 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton btncolones;
+    private javax.swing.JButton btnconsultarconveersión;
     private javax.swing.JButton btnconsultarconversion;
     private javax.swing.JRadioButton btndolares;
     private javax.swing.JButton btnlimpiar;
@@ -349,12 +355,13 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dtinicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbresultado;
     private javax.swing.JTable tblresultados;
     private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables

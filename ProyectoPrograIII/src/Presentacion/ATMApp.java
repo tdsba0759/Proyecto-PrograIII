@@ -47,88 +47,72 @@ public class ATMApp extends javax.swing.JFrame {
         btnConsultar = new javax.swing.JButton();
         btnTransferir1 = new javax.swing.JButton();
         btnRetirar = new javax.swing.JButton();
-        btnCerrar = new javax.swing.JButton();
         btnHisotrial = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblmovimientos = new javax.swing.JTable();
         Btntipodecambio = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setToolTipText("");
 
+        btnDepositar.setBackground(new java.awt.Color(255, 255, 255));
+        btnDepositar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnDepositar.setForeground(new java.awt.Color(0, 0, 0));
         btnDepositar.setText("Depositar");
         btnDepositar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDepositarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnDepositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 40));
 
+        btnConsultar.setBackground(new java.awt.Color(255, 255, 255));
+        btnConsultar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnConsultar.setForeground(new java.awt.Color(0, 0, 0));
         btnConsultar.setText("Consultar Saldo");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 110, 40));
 
+        btnTransferir1.setBackground(new java.awt.Color(255, 255, 255));
+        btnTransferir1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnTransferir1.setForeground(new java.awt.Color(0, 0, 0));
         btnTransferir1.setText("Transferir");
         btnTransferir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTransferir1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnTransferir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 110, 40));
 
+        btnRetirar.setBackground(new java.awt.Color(255, 255, 255));
+        btnRetirar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnRetirar.setForeground(new java.awt.Color(0, 0, 0));
         btnRetirar.setText("Retirar");
         btnRetirar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetirarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnRetirar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 110, 40));
 
-        btnCerrar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        btnCerrar.setText("Cerrar sesion");
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 760, -1));
-
+        btnHisotrial.setBackground(new java.awt.Color(255, 255, 255));
+        btnHisotrial.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnHisotrial.setForeground(new java.awt.Color(0, 0, 0));
         btnHisotrial.setText("Movimientos");
         btnHisotrial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHisotrialActionPerformed(evt);
             }
         });
-        jPanel2.add(btnHisotrial, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, 40));
 
-        tblmovimientos.setBackground(new java.awt.Color(0, 102, 102));
+        tblmovimientos.setBackground(new java.awt.Color(255, 255, 255));
         tblmovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Fecha", "Monto", "Movimiento", "Monto transacción", "Monto final "
@@ -136,15 +120,68 @@ public class ATMApp extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblmovimientos);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 690, 260));
-
-        Btntipodecambio.setText("Consultart tipo de cambio");
+        Btntipodecambio.setBackground(new java.awt.Color(255, 255, 255));
+        Btntipodecambio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        Btntipodecambio.setForeground(new java.awt.Color(0, 0, 0));
+        Btntipodecambio.setText("Consultar tipo de cambio");
         Btntipodecambio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtntipodecambioActionPerformed(evt);
             }
         });
-        jPanel2.add(Btntipodecambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, 40));
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Cerrar sesión");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnTransferir1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnHisotrial, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(Btntipodecambio))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTransferir1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHisotrial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btntipodecambio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jButton1)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -407,12 +444,6 @@ public class ATMApp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRetirarActionPerformed
 
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        VentanaLogin login = new VentanaLogin();
-        login.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnCerrarActionPerformed
-
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // Verificar si la cuenta está autenticada
         if (cuentaAutenticada == null || cuentaAutenticada.isEmpty()) {
@@ -441,10 +472,16 @@ public class ATMApp extends javax.swing.JFrame {
 
     private void BtntipodecambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtntipodecambioActionPerformed
        Frm_tipo_cambio cambio = new Frm_tipo_cambio();
-       
             cambio.setVisible(true);
             this.dispose();  
     }//GEN-LAST:event_BtntipodecambioActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+          VentanaLogin login = new VentanaLogin();
+          login.setVisible(true);
+          this.dispose();
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -487,12 +524,12 @@ public class ATMApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Btntipodecambio;
-    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnDepositar;
     private javax.swing.JButton btnHisotrial;
     private javax.swing.JButton btnRetirar;
     private javax.swing.JButton btnTransferir1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblmovimientos;
