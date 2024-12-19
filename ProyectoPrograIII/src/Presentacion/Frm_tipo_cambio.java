@@ -80,7 +80,9 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, -1, -1));
         jPanel1.add(dtfinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, 136, -1));
 
+        btnconsultarconversion.setBackground(new java.awt.Color(255, 255, 255));
         btnconsultarconversion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnconsultarconversion.setForeground(new java.awt.Color(0, 0, 0));
         btnconsultarconversion.setText("Consultar");
         btnconsultarconversion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +91,9 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
         });
         jPanel1.add(btnconsultarconversion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
 
+        btnlimpiar.setBackground(new java.awt.Color(255, 255, 255));
         btnlimpiar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnlimpiar.setForeground(new java.awt.Color(0, 0, 0));
         btnlimpiar.setText("Limpiar");
         btnlimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,7 +102,9 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
         });
         jPanel1.add(btnlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
 
+        btnregresar.setBackground(new java.awt.Color(255, 255, 255));
         btnregresar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnregresar.setForeground(new java.awt.Color(0, 0, 0));
         btnregresar.setText("Regresar");
         btnregresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +140,9 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 840, 164));
 
+        txtMonto.setBackground(new java.awt.Color(255, 255, 255));
         txtMonto.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        txtMonto.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 143, 104, 84));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -152,7 +160,9 @@ public class Frm_tipo_cambio extends javax.swing.JFrame {
         lbresultado.setText("Monto");
         jPanel1.add(lbresultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
+        btnconsultarconveersión.setBackground(new java.awt.Color(255, 255, 255));
         btnconsultarconveersión.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnconsultarconveersión.setForeground(new java.awt.Color(0, 0, 0));
         btnconsultarconveersión.setText("Consultar");
         btnconsultarconveersión.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
